@@ -1,24 +1,30 @@
 {
-  "name": "ADHD Smart Screen",
-  "short_name": "ADHD Smart Check",
-  "description": "ระบบคัดกรองภาวะสมาธิสั้นพร้อมแปลผลอัตโนมัติ",
-  "lang": "th",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#1e88e5",
-  "background_color": "#f4f7f9",
+  "short_name": "ADHD Check",
+  "name": "ADHD Smart Check",
   "icons": [
     {
-      "src": "./192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any apple-touch-icon"
     },
     {
-      "src": "./512.png",
+      "src": "192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#ffffff",
+  "theme_color": "#00a896",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "ระบบคัดกรองและติดตามประเมินสมาธิสั้น (ADHD Smart Check)"
 }
