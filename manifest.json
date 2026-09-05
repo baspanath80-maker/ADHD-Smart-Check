@@ -1,19 +1,13 @@
 {
-  "name": "ADHD Smart Screen",
-  "short_name": "ADHD Screen",
+  "short_name": "ADHD Smart",
+  "name": "ADHD Smart Screen (SNAP-IV)",
   "description": "ระบบคัดกรองภาวะสมาธิสั้นด้วย SNAP-IV โรงพยาบาลดอนจาน",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#f4f7f9",
-  "theme_color": "#1e88e5",
-  "lang": "th",
   "icons": [
     {
       "src": "./icons/icon-180.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "./icons/icon-192.png",
@@ -27,5 +21,11 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#f4f7f9",
+  "theme_color": "#1e88e5",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "./"
 }
