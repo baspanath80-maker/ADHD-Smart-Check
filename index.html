@@ -274,255 +274,6 @@ select {
 
 
 /* =========================================================
-   INSTALL MODAL
-========================================================= */
-
-.install-modal {
-
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 99999;
-
-}
-
-.install-modal-overlay {
-
-  position: absolute;
-
-  inset: 0;
-
-  background: rgba(0,0,0,.62);
-
-}
-
-.install-modal-card {
-
-  position: absolute;
-
-  left: 50%;
-
-  bottom: 0;
-
-  transform: translateX(-50%);
-
-  width: min(100%,700px);
-
-  background: #fff;
-
-  border-radius: 28px 28px 0 0;
-
-  padding: 42px 20px 28px;
-
-  box-shadow: 0 -10px 40px rgba(0,0,0,.2);
-
-  animation: slideUp .3s ease;
-
-}
-
-@keyframes slideUp {
-
-  from {
-    transform: translate(-50%,100%);
-  }
-
-  to {
-    transform: translate(-50%,0);
-  }
-
-}
-
-.install-modal-card h2 {
-
-  justify-content: center;
-
-  text-align: center;
-
-  color: #222;
-
-  font-size: 28px;
-
-  margin: 0 0 28px;
-
-}
-
-.install-modal-close {
-
-  position: absolute;
-
-  right: 18px;
-
-  top: 15px;
-
-  width: 42px;
-
-  height: 42px;
-
-  border: none;
-
-  background: transparent;
-
-  color: #777;
-
-  font-size: 25px;
-
-  cursor: pointer;
-
-}
-
-
-/* =========================================================
-   INSTALL OPTION
-========================================================= */
-
-.install-option {
-
-  width: 100%;
-
-  min-height: 105px;
-
-  border: none;
-
-  background: #fff0ea;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 18px;
-
-  padding: 18px 20px;
-
-  cursor: pointer;
-
-  text-align: left;
-
-  border-bottom: 1px solid #fff;
-
-}
-
-.install-option:first-of-type {
-
-  border-radius: 25px 25px 0 0;
-
-}
-
-.install-option:last-of-type {
-
-  border-radius: 0 0 25px 25px;
-
-}
-
-.install-option:hover {
-
-  background: #ffe6dc;
-
-}
-
-.install-option-icon {
-
-  position: relative;
-
-  width: 78px;
-
-  height: 78px;
-
-  flex-shrink: 0;
-
-}
-
-.install-option-icon img {
-
-  width: 78px;
-
-  height: 78px;
-
-  object-fit: cover;
-
-  border-radius: 12px;
-
-}
-
-.download-badge,
-.chrome-badge {
-
-  position: absolute;
-
-  right: -7px;
-
-  bottom: -7px;
-
-  width: 31px;
-
-  height: 31px;
-
-  border-radius: 50%;
-
-  background: #ffffff;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  box-shadow: 0 2px 7px rgba(0,0,0,.2);
-
-}
-
-.download-badge {
-
-  color: #222;
-
-}
-
-.chrome-badge {
-
-  color: #4285f4;
-
-  font-size: 19px;
-
-}
-
-.install-option-text {
-
-  flex: 1;
-
-}
-
-.install-option-text strong {
-
-  display: block;
-
-  font-size: 25px;
-
-  font-weight: 500;
-
-  color: #222;
-
-}
-
-.install-option-text small {
-
-  display: block;
-
-  font-size: 15px;
-
-  color: #333;
-
-}
-
-.install-option > i {
-
-  font-size: 22px;
-
-  color: #555;
-
-}
-
-
-/* =========================================================
    SHORTCUT MODAL
 ========================================================= */
 
@@ -1529,27 +1280,6 @@ select:focus {
 
   }
 
-  .install-option-icon,
-  .install-option-icon img {
-
-    width: 65px;
-
-    height: 65px;
-
-  }
-
-  .install-option-text strong {
-
-    font-size: 22px;
-
-  }
-
-  .install-option-text small {
-
-    font-size: 13px;
-
-  }
-
   .shortcut-card {
 
     width: calc(100% - 20px);
@@ -1611,7 +1341,6 @@ select:focus {
 
   #snapForm,
   #installBox,
-  #installModal,
   #shortcutModal {
 
     display: none !important;
@@ -1676,8 +1405,10 @@ select:focus {
 
       <div class="pwa-app-icon">
 
-        <img src="./icons/192.png" alt="ADHD Smart Check">
-
+        <img
+          src="./icons/192.png"
+          alt="ADHD Smart Check"
+          onerror="this.style.display='none';">
 
       </div>
 
@@ -1710,126 +1441,13 @@ select:focus {
 
 
 <!-- =====================================================
-     INSTALL MODAL
-===================================================== -->
-
-<div
-  class="install-modal"
-  id="installModal"
-  style="display:Check;">
-
-  <div class="install-modal-overlay"></div>
-
-  <div class="install-modal-card">
-
-    <button
-      type="button"
-      class="install-modal-close"
-      id="closeInstallModal">
-
-      <i class="fa-solid fa-xmark"></i>
-
-    </button>
-
-    <h2>
-      ติดตั้งและสร้างทางลัด
-    </h2>
-
-
-    <!-- =================================================
-         OPTION 1 : INSTALL
-    ================================================== -->
-
-    <button
-      type="button"
-      class="install-option"
-      id="installPwaButton">
-
-      <div class="install-option-icon">
-
-        <img
-          src="./icons/192.png"
-          alt="ADHD Smart Check"
-          onerror="this.style.display='Check';">
-
-        <span class="download-badge">
-
-          <i class="fa-solid fa-download"></i>
-
-        </span>
-
-      </div>
-
-      <div class="install-option-text">
-
-        <strong>
-          ติดตั้ง
-        </strong>
-
-        <small>
-          ติดตั้ง ADHD Smart Check เป็นแอป
-        </small>
-
-      </div>
-
-      <i class="fa-solid fa-chevron-right"></i>
-
-    </button>
-
-
-    <!-- =================================================
-         OPTION 2 : SHORTCUT
-    ================================================== -->
-
-    <button
-      type="button"
-      class="install-option"
-      id="shortcutButton">
-
-      <div class="install-option-icon">
-
-        <img
-          src="./icons/192.png"
-          alt="ADHD Smart Check"
-          onerror="this.style.display='Check';">
-
-        <span class="chrome-badge">
-
-          <i class="fa-brands fa-chrome"></i>
-
-        </span>
-
-      </div>
-
-      <div class="install-option-text">
-
-        <strong>
-          สร้างทางลัด
-        </strong>
-
-        <small>
-          ทางลัดจะเปิดใน Chrome
-        </small>
-
-      </div>
-
-      <i class="fa-solid fa-chevron-right"></i>
-
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
      SHORTCUT INSTRUCTION
 ===================================================== -->
 
 <div
   class="shortcut-modal"
   id="shortcutModal"
-  style="display:Check;">
+  style="display:none;">
 
   <div class="shortcut-overlay"></div>
 
@@ -1849,7 +1467,7 @@ select:focus {
       src="./icons/192.png"
       class="shortcut-logo"
       alt="ADHD Smart Check"
-      onerror="this.style.display='Check';">
+      onerror="this.style.display='none';">
 
 
     <h2>
@@ -3861,7 +3479,7 @@ function resetForm(){
 
 
 /* =========================================================
-   PWA INSTALL
+   PWA INSTALL & SHORTCUT
 ========================================================= */
 
 let deferredPrompt = null;
@@ -3876,30 +3494,6 @@ document.getElementById(
 const howInstallButton =
 document.getElementById(
 "howInstallButton"
-);
-
-
-const installModal =
-document.getElementById(
-"installModal"
-);
-
-
-const closeInstallModal =
-document.getElementById(
-"closeInstallModal"
-);
-
-
-const installPwaButton =
-document.getElementById(
-"installPwaButton"
-);
-
-
-const shortcutButton =
-document.getElementById(
-"shortcutButton"
 );
 
 
@@ -3964,114 +3558,12 @@ event => {
 
 
 /* =========================================================
-   HOW TO INSTALL
+   HOW TO INSTALL (SHOW SHORTCUT MODAL DIRECTLY)
 ========================================================= */
 
 howInstallButton.addEventListener(
 "click",
 () => {
-
-  installModal.style.display =
-  "block";
-
-}
-);
-
-
-/* =========================================================
-   CLOSE INSTALL
-========================================================= */
-
-closeInstallModal.addEventListener(
-"click",
-() => {
-
-  installModal.style.display =
-  "none";
-
-}
-);
-
-
-/* =========================================================
-   CLOSE INSTALL BY OVERLAY
-========================================================= */
-
-document.querySelector(
-".install-modal-overlay"
-).addEventListener(
-"click",
-() => {
-
-  installModal.style.display =
-  "none";
-
-}
-);
-
-
-/* =========================================================
-   REAL PWA INSTALL
-========================================================= */
-
-installPwaButton.addEventListener(
-"click",
-async () => {
-
-  if(!deferredPrompt){
-
-    alert(
-
-      "Chrome ยังไม่แสดงปุ่มติดตั้งอัตโนมัติ\n\n" +
-
-      "ให้กดเมนู ⋮ ของ Chrome\n" +
-
-      "แล้วเลือก \"ติดตั้งแอป\" หรือ " +
-
-      "\"เพิ่มลงในหน้าจอหลัก\""
-
-    );
-
-    return;
-
-  }
-
-
-  deferredPrompt.prompt();
-
-
-  const result =
-  await deferredPrompt.userChoice;
-
-
-  console.log(
-    "Install result:",
-    result.outcome
-  );
-
-
-  deferredPrompt =
-  null;
-
-
-  installModal.style.display =
-  "none";
-
-}
-);
-
-
-/* =========================================================
-   CREATE SHORTCUT
-========================================================= */
-
-shortcutButton.addEventListener(
-"click",
-() => {
-
-  installModal.style.display =
-  "none";
-
 
   shortcutModal.style.display =
   "block";
@@ -4133,7 +3625,7 @@ window.addEventListener(
   null;
 
 
-  installModal.style.display =
+  shortcutModal.style.display =
   "none";
 
 
