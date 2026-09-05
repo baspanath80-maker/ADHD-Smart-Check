@@ -1,30 +1,26 @@
 {
-  "short_name": "ADHD Check",
-  "name": "ADHD Smart Check",
-  "icons": [
-    {
-      "src": "180.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any apple-touch-icon"
-    },
-    {
-      "src": "192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "start_url": "./index.html",
-  "background_color": "#ffffff",
-  "theme_color": "#00a896",
+  "name": "ADHD Smart Screen (SNAP-IV)",
+  "short_name": "ADHD Smart",
+  "description": "ระบบคัดกรองภาวะสมาธิสั้นด้วยแบบประเมิน SNAP-IV พร้อมแปลผลอัตโนมัติ",
+  "lang": "th",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "description": "ระบบคัดกรองและติดตามประเมินสมาธิสั้น (ADHD Smart Check)"
+  "background_color": "#f4f7f9",
+  "theme_color": "#1e88e5",
+  "icons": [
+    {
+      "src": "./19.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./5.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
