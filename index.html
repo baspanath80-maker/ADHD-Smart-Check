@@ -143,6 +143,13 @@ select {
   font-size: 22px;
   box-shadow: 0 4px 10px rgba(30, 136, 229, 0.25);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pwa-app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .pwa-text-info h3 {
@@ -162,38 +169,24 @@ select {
 }
 
 .btn-how-to {
-  background-color: #1e88e5;
+  background-color: #2e7d32;
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(30, 136, 229, 0.2);
+  box-shadow: 0 2px 6px rgba(46, 125, 50, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-how-to:hover {
-  background-color: #1565c0;
-}
-
-.pwa-steps-list {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px dashed #e2e8f0;
-  font-size: 14px;
-  color: #475569;
-}
-
-.pwa-steps-list ol {
-  margin: 0;
-  padding-left: 24px;
-}
-
-.pwa-steps-list li {
-  margin-bottom: 4px;
+  background-color: #1b5e20;
 }
 
 /* =========================
@@ -893,10 +886,11 @@ select:focus {
        INSTALL APP CARD
   ========================== -->
 
-  <div class="install-app-box" id="installBox">
+  <div class="install-app-box" id="installBox" style="display: none;">
     <div class="pwa-header-row">
       <div class="pwa-title-group">
         <div class="pwa-app-icon">
+          <img src="./icons/icon-192.png" alt="App Icon" onerror="this.onerror=null; this.remove();">
           <i class="fa-solid fa-brain"></i>
         </div>
         <div class="pwa-text-info">
@@ -905,18 +899,8 @@ select:focus {
         </div>
       </div>
       <button type="button" class="btn-how-to" id="installButton">
-        วิธีติดตั้ง
+        <i class="fa-solid fa-download"></i> ติดตั้ง
       </button>
-    </div>
-
-    <div class="pwa-steps-list" id="pwaSteps">
-      <ol>
-        <li>เปิดเว็บไซต์ด้วย <strong>Google Chrome</strong></li>
-        <li>กด <strong><i class="fa-solid fa-ellipsis-vertical"></i> มุมขวาบน</strong></li>
-        <li>เลือก <strong>เพิ่มลงในหน้าจอหลัก (Add to Home screen)</strong> หรือ <strong>ติดตั้งแอป</strong></li>
-        <li>กด <strong>เพิ่ม / ติดตั้ง</strong></li>
-        <li>จะได้รับไอคอน <strong>ADHD Smart</strong> พร้อมโลโก้บนหน้าจอมือถือ</li>
-      </ol>
     </div>
   </div>
 
@@ -2502,21 +2486,41 @@ function resetForm(){
 ========================================================= */
 
 let deferredPrompt = null;
+const installBox = document.getElementById("installBox");
+const installButton = document.getElementById("installButton");
 
 window.addEventListener("beforeinstallprompt", (e) => {
+  // ป้องกันเบราว์เซอร์เปิด prompt อัตโนมัติ
   e.preventDefault();
   deferredPrompt = e;
+
+  // แสดงแถบปุ่มติดตั้ง
+  if (installBox) {
+    installBox.style.display = "block";
+  }
 });
 
-document.getElementById("installButton").addEventListener("click", async () => {
-  if (deferredPrompt) {
+if (installButton) {
+  installButton.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+
+    // เรียก Pop-up ติดตั้งระบบขึ้นมา (แสดงไอคอนแอปและปุ่มติดตั้ง/สร้างทางลัด)
     deferredPrompt.prompt();
-    const result = await deferredPrompt.userChoice;
+
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User choice: ${outcome}`);
+
     deferredPrompt = null;
-  } else {
-    const steps = document.getElementById("pwaSteps");
-    steps.scrollIntoView({ behavior: "smooth", block: "center" });
+    installBox.style.display = "none";
+  });
+}
+
+window.addEventListener("appinstalled", () => {
+  if (installBox) {
+    installBox.style.display = "none";
   }
+  deferredPrompt = null;
+  console.log("PWA installed successfully");
 });
 
 
