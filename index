@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1e88e5">
-<meta name="description" content="ADHD Smart Screen (SNAP-IV) ระบบคัดกรองภาวะสมาธิสั้นพร้อมแปลผลอัตโนมัติ โรงพยาบาลดอนจาน">
+<meta name="description" content="ADHD Smart Screen (SNAP-IV) คัดกรองภาวะสมาธิสั้นพร้อมแปลผลอัตโนมัติ โรงพยาบาลดอนจาน">
 
 <!-- Android / PWA -->
 <link rel="manifest" href="./manifest.json">
