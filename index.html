@@ -1,37 +1,26 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>ADHD Smart Check (SNAP-IV)</title>
 
 <meta name="theme-color" content="#1e88e5">
-
 <meta name="background-color" content="#f4f7f9">
-
 <meta name="description"
       content="ADHD Smart Check ระบบคัดกรองภาวะสมาธิสั้นด้วย SNAP-IV โรงพยาบาลดอนจาน">
 
-<meta name="mobile-web-app-capable"
-      content="yes">
-
-<meta name="apple-mobile-web-app-capable"
-      content="yes">
-
-<meta name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent">
-
-<meta name="apple-mobile-web-app-title"
-      content="ADHD Smart">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ADHD Smart">
 
 <link rel="manifest" href="./manifest.json">
 
-<!-- ICONS -->
+<!-- =====================================================
+     ICONS
+===================================================== -->
 
 <link rel="icon"
       type="image/png"
@@ -56,7 +45,6 @@
 
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 
 <style>
 
@@ -120,11 +108,9 @@ body {
 
   padding: 30px 15px;
 
-  background:
-    var(--bg-body);
+  background: var(--bg-body);
 
-  color:
-    var(--text-main);
+  color: var(--text-main);
 
   line-height: 1.6;
 
@@ -147,18 +133,15 @@ select {
 
   margin: 0 auto;
 
-  background:
-    var(--card-bg);
+  background: var(--card-bg);
 
   padding: 40px;
 
   border-radius: 24px;
 
-  box-shadow:
-    var(--shadow-soft);
+  box-shadow: var(--shadow-soft);
 
-  border:
-    1px solid rgba(21,101,192,.08);
+  border: 1px solid rgba(21,101,192,.08);
 
 }
 
@@ -169,166 +152,123 @@ select {
 
 .install-app-box {
 
-  background:
-    #ffffff;
+  background: #ffffff;
 
-  border:
-    1px solid #e2e8f0;
+  border: 1px solid #e2e8f0;
 
-  border-radius:
-    20px;
+  border-radius: 20px;
 
-  padding:
-    20px;
+  padding: 20px;
 
-  margin-bottom:
-    25px;
+  margin-bottom: 25px;
 
-  box-shadow:
-    0 4px 15px rgba(0,0,0,.03);
+  box-shadow: 0 4px 15px rgba(0,0,0,.03);
 
 }
 
 .pwa-header-row {
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
-  gap:
-    12px;
+  gap: 12px;
 
 }
 
 .pwa-title-group {
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    12px;
+  gap: 12px;
 
 }
 
 .pwa-app-icon {
 
-  width:
-    58px;
+  width: 58px;
 
-  height:
-    58px;
+  height: 58px;
 
-  border-radius:
-    14px;
+  border-radius: 14px;
 
-  overflow:
-    hidden;
+  overflow: hidden;
 
-  flex-shrink:
-    0;
+  flex-shrink: 0;
 
-  background:
-    #1e88e5;
+  background: #1e88e5;
 
-  box-shadow:
-    0 4px 10px rgba(30,136,229,.25);
+  box-shadow: 0 4px 10px rgba(30,136,229,.25);
 
 }
 
 .pwa-app-icon img {
 
-  width:
-    100%;
+  width: 100%;
 
-  height:
-    100%;
+  height: 100%;
 
-  object-fit:
-    cover;
+  object-fit: cover;
 
 }
 
 .pwa-text-info h3 {
 
-  margin:
-    0;
+  margin: 0;
 
-  padding:
-    0;
+  padding: 0;
 
-  background:
-    none;
+  background: none;
 
-  color:
-    #1e88e5;
+  color: #1e88e5;
 
-  font-size:
-    18px;
+  font-size: 18px;
 
-  font-weight:
-    700;
+  font-weight: 700;
 
 }
 
 .pwa-text-info p {
 
-  margin:
-    2px 0 0;
+  margin: 2px 0 0;
 
-  font-size:
-    14px;
+  font-size: 14px;
 
-  color:
-    #64748b;
+  color: #64748b;
 
 }
 
 .btn-how-to {
 
-  background:
-    #168fd0;
+  background: #168fd0;
 
-  color:
-    white;
+  color: white;
 
-  border:
-    none;
+  border: none;
 
-  border-radius:
-    12px;
+  border-radius: 12px;
 
-  padding:
-    11px 20px;
+  padding: 11px 20px;
 
-  font-size:
-    16px;
+  font-size: 16px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  white-space:
-    nowrap;
+  white-space: nowrap;
 
-  box-shadow:
-    0 3px 8px rgba(30,136,229,.2);
+  box-shadow: 0 3px 8px rgba(30,136,229,.2);
 
 }
 
 .btn-how-to:hover {
 
-  background:
-    #1565c0;
+  background: #1565c0;
 
 }
 
@@ -339,132 +279,95 @@ select {
 
 .install-modal {
 
-  position:
-    fixed;
+  position: fixed;
 
-  inset:
-    0;
+  inset: 0;
 
-  z-index:
-    99999;
+  z-index: 99999;
 
 }
 
 .install-modal-overlay {
 
-  position:
-    absolute;
+  position: absolute;
 
-  inset:
-    0;
+  inset: 0;
 
-  background:
-    rgba(0,0,0,.62);
+  background: rgba(0,0,0,.62);
 
 }
 
 .install-modal-card {
 
-  position:
-    absolute;
+  position: absolute;
 
-  left:
-    50%;
+  left: 50%;
 
-  bottom:
-    0;
+  bottom: 0;
 
-  transform:
-    translateX(-50%);
+  transform: translateX(-50%);
 
-  width:
-    min(100%,700px);
+  width: min(100%,700px);
 
-  background:
-    #fff;
+  background: #fff;
 
-  border-radius:
-    28px 28px 0 0;
+  border-radius: 28px 28px 0 0;
 
-  padding:
-    42px 20px 28px;
+  padding: 42px 20px 28px;
 
-  box-shadow:
-    0 -10px 40px rgba(0,0,0,.2);
+  box-shadow: 0 -10px 40px rgba(0,0,0,.2);
 
-  animation:
-    slideUp .3s ease;
+  animation: slideUp .3s ease;
 
 }
 
 @keyframes slideUp {
 
   from {
-
-    transform:
-      translate(-50%,100%);
-
+    transform: translate(-50%,100%);
   }
 
   to {
-
-    transform:
-      translate(-50%,0);
-
+    transform: translate(-50%,0);
   }
 
 }
 
 .install-modal-card h2 {
 
-  justify-content:
-    center;
+  justify-content: center;
 
-  text-align:
-    center;
+  text-align: center;
 
-  color:
-    #222;
+  color: #222;
 
-  font-size:
-    28px;
+  font-size: 28px;
 
-  margin:
-    0 0 28px;
+  margin: 0 0 28px;
 
 }
 
 .install-modal-close {
 
-  position:
-    absolute;
+  position: absolute;
 
-  right:
-    18px;
+  right: 18px;
 
-  top:
-    15px;
+  top: 15px;
 
-  width:
-    42px;
+  width: 42px;
 
-  height:
-    42px;
+  height: 42px;
 
-  border:
-    none;
+  border: none;
 
-  background:
-    transparent;
+  background: transparent;
 
-  color:
-    #777;
+  color: #777;
 
-  font-size:
-    25px;
+  font-size: 25px;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
 }
 
@@ -475,192 +378,146 @@ select {
 
 .install-option {
 
-  width:
-    100%;
+  width: 100%;
 
-  min-height:
-    105px;
+  min-height: 105px;
 
-  border:
-    none;
+  border: none;
 
-  background:
-    #fff0ea;
+  background: #fff0ea;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    18px;
+  gap: 18px;
 
-  padding:
-    18px 20px;
+  padding: 18px 20px;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  text-align:
-    left;
+  text-align: left;
 
-  border-bottom:
-    1px solid #fff;
+  border-bottom: 1px solid #fff;
 
 }
 
 .install-option:first-of-type {
 
-  border-radius:
-    25px 25px 0 0;
+  border-radius: 25px 25px 0 0;
 
 }
 
 .install-option:last-of-type {
 
-  border-radius:
-    0 0 25px 25px;
+  border-radius: 0 0 25px 25px;
 
 }
 
 .install-option:hover {
 
-  background:
-    #ffe6dc;
+  background: #ffe6dc;
 
 }
 
 .install-option-icon {
 
-  position:
-    relative;
+  position: relative;
 
-  width:
-    78px;
+  width: 78px;
 
-  height:
-    78px;
+  height: 78px;
 
-  flex-shrink:
-    0;
+  flex-shrink: 0;
 
 }
 
 .install-option-icon img {
 
-  width:
-    78px;
+  width: 78px;
 
-  height:
-    78px;
+  height: 78px;
 
-  object-fit:
-    cover;
+  object-fit: cover;
 
-  border-radius:
-    4px;
+  border-radius: 12px;
 
 }
 
 .download-badge,
 .chrome-badge {
 
-  position:
-    absolute;
+  position: absolute;
 
-  right:
-    -7px;
+  right: -7px;
 
-  bottom:
-    -7px;
+  bottom: -7px;
 
-  width:
-    31px;
+  width: 31px;
 
-  height:
-    31px;
+  height: 31px;
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
-  background:
-    #ffffff;
+  background: #ffffff;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    center;
+  justify-content: center;
 
-  box-shadow:
-    0 2px 7px rgba(0,0,0,.2);
+  box-shadow: 0 2px 7px rgba(0,0,0,.2);
 
 }
 
 .download-badge {
 
-  color:
-    #222;
+  color: #222;
 
 }
 
 .chrome-badge {
 
-  color:
-    #4285f4;
+  color: #4285f4;
 
-  font-size:
-    19px;
+  font-size: 19px;
 
 }
 
 .install-option-text {
 
-  flex:
-    1;
+  flex: 1;
 
 }
 
 .install-option-text strong {
 
-  display:
-    block;
+  display: block;
 
-  font-size:
-    25px;
+  font-size: 25px;
 
-  font-weight:
-    500;
+  font-weight: 500;
 
-  color:
-    #222;
+  color: #222;
 
 }
 
 .install-option-text small {
 
-  display:
-    block;
+  display: block;
 
-  font-size:
-    15px;
+  font-size: 15px;
 
-  color:
-    #333;
+  color: #333;
 
 }
 
 .install-option > i {
 
-  font-size:
-    22px;
+  font-size: 22px;
 
-  color:
-    #555;
+  color: #555;
 
 }
 
@@ -671,234 +528,193 @@ select {
 
 .shortcut-modal {
 
-  position:
-    fixed;
+  position: fixed;
 
-  inset:
-    0;
+  inset: 0;
 
-  z-index:
-    100000;
+  z-index: 100000;
 
 }
 
 .shortcut-overlay {
 
-  position:
-    absolute;
+  position: absolute;
 
-  inset:
-    0;
+  inset: 0;
 
-  background:
-    rgba(0,0,0,.65);
+  background: rgba(0,0,0,.65);
 
 }
 
 .shortcut-card {
 
-  position:
-    absolute;
+  position: absolute;
 
-  left:
-    50%;
+  left: 50%;
 
-  top:
-    50%;
+  top: 50%;
 
-  transform:
-    translate(-50%,-50%);
+  transform: translate(-50%,-50%);
 
-  width:
-    calc(100% - 30px);
+  width: calc(100% - 30px);
 
-  max-width:
-    500px;
+  max-width: 500px;
 
-  background:
-    white;
+  max-height: 90vh;
 
-  border-radius:
-    25px;
+  overflow-y: auto;
 
-  padding:
-    32px 25px 25px;
+  background: white;
 
-  text-align:
-    center;
+  border-radius: 25px;
 
-  box-shadow:
-    0 15px 50px rgba(0,0,0,.25);
+  padding: 32px 25px 25px;
+
+  text-align: center;
+
+  box-shadow: 0 15px 50px rgba(0,0,0,.25);
 
 }
 
 .shortcut-close {
 
-  position:
-    absolute;
+  position: absolute;
 
-  right:
-    15px;
+  right: 15px;
 
-  top:
-    12px;
+  top: 12px;
 
-  width:
-    40px;
+  width: 40px;
 
-  height:
-    40px;
+  height: 40px;
 
-  border:
-    none;
+  border: none;
 
-  background:
-    transparent;
+  background: transparent;
 
-  font-size:
-    23px;
+  font-size: 23px;
 
-  color:
-    #777;
+  color: #777;
+
+  cursor: pointer;
 
 }
 
 .shortcut-logo {
 
-  width:
-    90px;
+  width: 90px;
 
-  height:
-    90px;
+  height: 90px;
 
-  object-fit:
-    cover;
+  object-fit: cover;
 
-  border-radius:
-    15px;
+  border-radius: 15px;
+
+  display: block;
+
+  margin: 0 auto 12px;
 
 }
 
 .shortcut-card h2 {
 
-  display:
-    block;
+  display: block;
 
-  color:
-    #1565c0;
+  color: #1565c0;
 
-  font-size:
-    23px;
+  font-size: 23px;
 
-  margin:
-    10px 0;
+  margin: 10px 0;
 
 }
 
-.shortcut-card p {
+.shortcut-card > p {
 
-  color:
-    #555;
+  color: #555;
 
-  font-size:
-    16px;
+  font-size: 16px;
+
+  margin: 0 0 10px;
 
 }
 
 .shortcut-steps {
 
-  text-align:
-    left;
+  text-align: left;
 
-  margin-top:
-    20px;
+  margin-top: 20px;
 
 }
 
 .shortcut-steps div {
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: flex-start;
 
-  gap:
-    12px;
+  gap: 12px;
 
-  padding:
-    13px 5px;
+  padding: 13px 5px;
 
-  border-bottom:
-    1px solid #eee;
+  border-bottom: 1px solid #eee;
 
-  font-size:
-    16px;
+  font-size: 16px;
 
 }
 
 .shortcut-steps span {
 
-  width:
-    32px;
+  width: 32px;
 
-  height:
-    32px;
+  height: 32px;
 
-  border-radius:
-    50%;
+  min-width: 32px;
 
-  background:
-    #1e88e5;
+  border-radius: 50%;
 
-  color:
-    white;
+  background: #1e88e5;
 
-  display:
-    flex;
+  color: white;
 
-  align-items:
-    center;
+  display: flex;
 
-  justify-content:
-    center;
+  align-items: center;
 
-  font-weight:
-    bold;
+  justify-content: center;
 
-  flex-shrink:
-    0;
+  font-weight: bold;
+
+  flex-shrink: 0;
+
+}
+
+.shortcut-steps p {
+
+  margin: 2px 0 0;
 
 }
 
 .shortcut-ok {
 
-  width:
-    100%;
+  width: 100%;
 
-  margin-top:
-    22px;
+  margin-top: 22px;
 
-  padding:
-    13px;
+  padding: 13px;
 
-  border:
-    none;
+  border: none;
 
-  border-radius:
-    12px;
+  border-radius: 12px;
 
-  background:
-    #1e88e5;
+  background: #1e88e5;
 
-  color:
-    white;
+  color: white;
 
-  font-size:
-    17px;
+  font-size: 17px;
 
-  font-weight:
-    600;
+  font-weight: 600;
+
+  cursor: pointer;
 
 }
 
@@ -909,48 +725,35 @@ select {
 
 .header-brand {
 
-  text-align:
-    center;
+  text-align: center;
 
-  margin-bottom:
-    40px;
+  margin-bottom: 40px;
 
 }
 
 .brand-icon {
 
-  width:
-    100px;
+  width: 100px;
 
-  height:
-    100px;
+  height: 100px;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    center;
+  justify-content: center;
 
-  margin:
-    0 auto 15px;
+  margin: 0 auto 15px;
 
-  border-radius:
-    50px;
+  border-radius: 50px;
 
-  color:
-    var(--primary);
+  color: var(--primary);
 
-  background:
-    var(--primary-light);
+  background: var(--primary-light);
 
-  font-size:
-    45px;
+  font-size: 45px;
 
-  animation:
-    pulse 2s infinite ease-in-out;
+  animation: pulse 2s infinite ease-in-out;
 
 }
 
@@ -972,27 +775,21 @@ select {
 
 h1 {
 
-  color:
-    var(--primary-dark);
+  color: var(--primary-dark);
 
-  margin:
-    0 0 5px;
+  margin: 0 0 5px;
 
-  font-size:
-    32px;
+  font-size: 32px;
 
 }
 
 .subtitle {
 
-  color:
-    var(--text-muted);
+  color: var(--text-muted);
 
-  font-size:
-    16px;
+  font-size: 16px;
 
-  margin:
-    0;
+  margin: 0;
 
 }
 
@@ -1003,54 +800,39 @@ h1 {
 
 h2 {
 
-  color:
-    var(--text-main);
+  color: var(--text-main);
 
-  font-size:
-    20px;
+  font-size: 20px;
 
-  margin-bottom:
-    25px;
+  margin-bottom: 25px;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    10px;
+  gap: 10px;
 
 }
 
 h3 {
 
-  color:
-    var(--primary-dark);
+  color: var(--primary-dark);
 
-  margin:
-    0 0 20px;
+  margin: 0 0 20px;
 
-  padding:
-    14px 20px;
+  padding: 14px 20px;
 
-  background:
-    var(--primary-light);
+  background: var(--primary-light);
 
-  border-radius:
-    14px;
+  border-radius: 14px;
 
-  font-size:
-    18px;
+  font-size: 18px;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    10px;
+  gap: 10px;
 
 }
 
@@ -1061,55 +843,41 @@ h3 {
 
 .info-grid {
 
-  display:
-    grid;
+  display: grid;
 
-  grid-template-columns:
-    repeat(2,1fr);
+  grid-template-columns: repeat(2,1fr);
 
-  gap:
-    20px;
+  gap: 20px;
 
-  margin-bottom:
-    30px;
+  margin-bottom: 30px;
 
-  background:
-    #f8fafc;
+  background: #f8fafc;
 
-  padding:
-    25px;
+  padding: 25px;
 
-  border-radius:
-    18px;
+  border-radius: 18px;
 
-  border:
-    1px solid #edf2f7;
+  border: 1px solid #edf2f7;
 
 }
 
 .info-group {
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
 }
 
 label {
 
-  margin-bottom:
-    8px;
+  margin-bottom: 8px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  font-size:
-    15px;
+  font-size: 15px;
 
-  color:
-    #4a5568;
+  color: #4a5568;
 
 }
 
@@ -1117,40 +885,30 @@ input[type="text"],
 input[type="date"],
 select {
 
-  width:
-    100%;
+  width: 100%;
 
-  padding:
-    12px 16px;
+  padding: 12px 16px;
 
-  border:
-    1.5px solid #e2e8f0;
+  border: 1.5px solid #e2e8f0;
 
-  border-radius:
-    12px;
+  border-radius: 12px;
 
-  font-size:
-    15px;
+  font-size: 15px;
 
-  background:
-    #fff;
+  background: #fff;
 
-  color:
-    var(--text-main);
+  color: var(--text-main);
 
 }
 
 input:focus,
 select:focus {
 
-  border-color:
-    var(--primary);
+  border-color: var(--primary);
 
-  outline:
-    none;
+  outline: none;
 
-  box-shadow:
-    0 0 0 4px rgba(30,136,229,.15);
+  box-shadow: 0 0 0 4px rgba(30,136,229,.15);
 
 }
 
@@ -1161,93 +919,69 @@ select:focus {
 
 .assessor-options {
 
-  display:
-    flex;
+  display: flex;
 
-  gap:
-    15px;
+  gap: 15px;
 
 }
 
 .assessor-box {
 
-  flex:
-    1;
+  flex: 1;
 
-  position:
-    relative;
+  position: relative;
 
 }
 
 .assessor-box input {
 
-  position:
-    absolute;
+  position: absolute;
 
-  opacity:
-    0;
+  opacity: 0;
 
-  width:
-    100%;
+  width: 100%;
 
-  height:
-    100%;
+  height: 100%;
 
-  z-index:
-    2;
+  z-index: 2;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
 }
 
 .assessor-box label {
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    center;
+  justify-content: center;
 
-  gap:
-    10px;
+  gap: 10px;
 
-  padding:
-    12px;
+  padding: 12px;
 
-  background:
-    #fff;
+  background: #fff;
 
-  border:
-    1.5px solid #e2e8f0;
+  border: 1.5px solid #e2e8f0;
 
-  border-radius:
-    12px;
+  border-radius: 12px;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  margin:
-    0;
+  margin: 0;
 
 }
 
 .assessor-box input:checked + label {
 
-  background:
-    var(--primary-light);
+  background: var(--primary-light);
 
-  border-color:
-    var(--primary);
+  border-color: var(--primary);
 
-  color:
-    var(--primary-dark);
+  color: var(--primary-dark);
 
-  font-weight:
-    600;
+  font-weight: 600;
 
 }
 
@@ -1258,51 +992,37 @@ select:focus {
 
 .instruction-banner {
 
-  font-weight:
-    500;
+  font-weight: 500;
 
-  margin:
-    35px 0;
+  margin: 35px 0;
 
-  padding:
-    18px 25px;
+  padding: 18px 25px;
 
-  background:
-    #fff9db;
+  background: #fff9db;
 
-  border-left:
-    5px solid #fcc419;
+  border-left: 5px solid #fcc419;
 
-  border-radius:
-    0 14px 14px 0;
+  border-radius: 0 14px 14px 0;
 
-  font-size:
-    15px;
+  font-size: 15px;
 
-  color:
-    #665200;
+  color: #665200;
 
-  display:
-    flex;
+  display: flex;
 
-  gap:
-    15px;
+  gap: 15px;
 
 }
 
 .instruction-legend {
 
-  margin-top:
-    8px;
+  margin-top: 8px;
 
-  display:
-    flex;
+  display: flex;
 
-  gap:
-    15px;
+  gap: 15px;
 
-  flex-wrap:
-    wrap;
+  flex-wrap: wrap;
 
 }
 
@@ -1313,47 +1033,37 @@ select:focus {
 
 .question-group {
 
-  margin-bottom:
-    35px;
+  margin-bottom: 35px;
 
-  background:
-    #fff;
+  background: #fff;
 
-  border-radius:
-    16px;
+  border-radius: 16px;
 
 }
 
 .question {
 
-  padding:
-    22px 0;
+  padding: 22px 0;
 
-  border-bottom:
-    1px solid #edf2f7;
+  border-bottom: 1px solid #edf2f7;
 
 }
 
 .question:last-child {
 
-  border-bottom:
-    none;
+  border-bottom: none;
 
 }
 
 .question > label {
 
-  display:
-    block;
+  display: block;
 
-  font-size:
-    16px;
+  font-size: 16px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  color:
-    var(--text-main);
+  color: var(--text-main);
 
 }
 
@@ -1364,124 +1074,118 @@ select:focus {
 
 .options-inline {
 
-  display:
-    grid;
+  display: grid;
 
-  grid-template-columns:
-    repeat(4,1fr);
+  grid-template-columns: repeat(4,1fr);
 
-  gap:
-    10px;
+  gap: 10px;
 
 }
 
 .options-inline input {
 
-  position:
-    absolute;
+  position: absolute;
 
-  opacity:
-    0;
+  opacity: 0;
 
 }
 
 .options-inline label {
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    center;
+  justify-content: center;
 
-  padding:
-    10px 4px;
+  padding: 10px 4px;
 
-  border:
-    1.5px solid #e2e8f0;
+  border: 1.5px solid #e2e8f0;
 
-  border-radius:
-    14px;
+  border-radius: 14px;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  font-size:
-    13px;
+  font-size: 13px;
 
-  background:
-    #fff;
+  background: #fff;
 
-  margin:
-    0;
+  margin: 0;
 
-  text-align:
-    center;
+  text-align: center;
 
 }
 
 .options-inline label i {
 
-  font-size:
-    22px;
+  font-size: 22px;
 
 }
 
 .options-inline label[for$="_0"] i {
+
   color:var(--lvl-0);
+
 }
 
 .options-inline label[for$="_1"] i {
+
   color:var(--lvl-1);
+
 }
 
 .options-inline label[for$="_2"] i {
+
   color:var(--lvl-2);
+
 }
 
 .options-inline label[for$="_3"] i {
+
   color:var(--lvl-3);
+
 }
 
 .options-inline input:checked + label {
 
-  color:
-    white;
+  color: white;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  transform:
-    translateY(-3px);
+  transform: translateY(-3px);
 
 }
 
 .options-inline input:checked + label i {
 
-  color:
-    white !important;
+  color: white !important;
 
 }
 
 .options-inline input[value="0"]:checked + label {
+
   background:var(--lvl-0);
+
 }
 
 .options-inline input[value="1"]:checked + label {
+
   background:var(--lvl-1);
+
 }
 
 .options-inline input[value="2"]:checked + label {
+
   background:var(--lvl-2);
+
 }
 
 .options-inline input[value="3"]:checked + label {
+
   background:var(--lvl-3);
+
 }
 
 
@@ -1491,66 +1195,51 @@ select:focus {
 
 .form-buttons {
 
-  display:
-    flex;
+  display: flex;
 
-  gap:
-    15px;
+  gap: 15px;
 
-  margin-top:
-    40px;
+  margin-top: 40px;
 
-  justify-content:
-    center;
+  justify-content: center;
 
 }
 
 .form-buttons button {
 
-  padding:
-    14px 28px;
+  padding: 14px 28px;
 
-  color:
-    white;
+  color: white;
 
-  border:
-    none;
+  border: none;
 
-  border-radius:
-    14px;
+  border-radius: 14px;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  font-size:
-    16px;
+  font-size: 16px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
 }
 
 #calculateButton {
 
-  background:
-    var(--primary);
+  background: var(--primary);
 
-  width:
-    50%;
+  width: 50%;
 
 }
 
 #printButton {
 
-  background:
-    #475569;
+  background: #475569;
 
 }
 
 #resetButton {
 
-  background:
-    #ef4444;
+  background: #ef4444;
 
 }
 
@@ -1561,153 +1250,113 @@ select:focus {
 
 #printResult {
 
-  margin-top:
-    40px;
+  margin-top: 40px;
 
-  border:
-    2px solid var(--primary-light);
+  border: 2px solid var(--primary-light);
 
-  padding:
-    35px;
+  padding: 35px;
 
-  border-radius:
-    22px;
+  border-radius: 22px;
 
-  background:
-    #fff;
+  background: #fff;
 
-  display:
-    none;
+  display: none;
 
 }
 
 .result-header {
 
-  border-bottom:
-    2px solid var(--primary-light);
+  border-bottom: 2px solid var(--primary-light);
 
-  padding-bottom:
-    15px;
+  padding-bottom: 15px;
 
-  margin-bottom:
-    25px;
+  margin-bottom: 25px;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    12px;
+  gap: 12px;
 
-  color:
-    var(--primary-dark);
+  color: var(--primary-dark);
 
 }
 
 .patient-info-summary {
 
-  display:
-    grid;
+  display: grid;
 
-  grid-template-columns:
-    repeat(2,1fr);
+  grid-template-columns: repeat(2,1fr);
 
-  gap:
-    12px 30px;
+  gap: 12px 30px;
 
-  background:
-    #f8fafc;
+  background: #f8fafc;
 
-  padding:
-    20px;
+  padding: 20px;
 
-  border-radius:
-    14px;
+  border-radius: 14px;
 
-  margin-bottom:
-    30px;
+  margin-bottom: 30px;
 
 }
 
 #displaySummary {
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
-  gap:
-    12px;
+  gap: 12px;
 
 }
 
 #displaySummary p {
 
-  margin:
-    0;
+  margin: 0;
 
-  padding:
-    16px 20px;
+  padding: 16px 20px;
 
-  border-left:
-    5px solid var(--primary);
+  border-left: 5px solid var(--primary);
 
-  background:
-    var(--primary-light);
+  background: var(--primary-light);
 
-  border-radius:
-    6px 14px 14px 6px;
+  border-radius: 6px 14px 14px 6px;
 
-  display:
-    flex;
+  display: flex;
 
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    12px;
+  gap: 12px;
 
 }
 
 .status-badge {
 
-  padding:
-    6px 16px;
+  padding: 6px 16px;
 
-  border-radius:
-    20px;
+  border-radius: 20px;
 
-  font-weight:
-    bold;
+  font-weight: bold;
 
-  white-space:
-    nowrap;
+  white-space: nowrap;
 
 }
 
 .risk-badge {
 
-  background:
-    #fee2e2;
+  background: #fee2e2;
 
-  color:
-    var(--danger-color);
+  color: var(--danger-color);
 
 }
 
 .normal-badge {
 
-  background:
-    #dcfce7;
+  background: #dcfce7;
 
-  color:
-    var(--success-color);
+  color: var(--success-color);
 
 }
 
@@ -1718,72 +1367,58 @@ select:focus {
 
 #printTable {
 
-  display:
-    none;
+  display: none;
 
 }
 
 .result-table {
 
-  width:
-    100%;
+  width: 100%;
 
-  border-collapse:
-    collapse;
+  border-collapse: collapse;
 
-  margin-top:
-    20px;
+  margin-top: 20px;
 
 }
 
 .result-table th,
 .result-table td {
 
-  padding:
-    14px 18px;
+  padding: 14px 18px;
 
-  text-align:
-    left;
+  text-align: left;
 
-  font-size:
-    15px;
+  font-size: 15px;
 
 }
 
 .result-table th {
 
-  background:
-    var(--primary-dark);
+  background: var(--primary-dark);
 
-  color:
-    white;
+  color: white;
 
 }
 
 .result-table td {
 
-  border-bottom:
-    1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
 
 }
 
 .valid-result td:last-child {
 
-  color:
-    var(--success-color);
+  color: var(--success-color);
 
-  font-weight:
-    bold;
+  font-weight: bold;
 
 }
 
 .invalid-result td:last-child {
 
-  color:
-    var(--danger-color);
+  color: var(--danger-color);
 
-  font-weight:
-    bold;
+  font-weight: bold;
 
 }
 
@@ -1796,87 +1431,73 @@ select:focus {
 
   body {
 
-    padding:
-      10px 8px;
+    padding: 10px 8px;
 
   }
 
   .container {
 
-    padding:
-      22px 14px;
+    padding: 22px 14px;
 
-    border-radius:
-      18px;
+    border-radius: 18px;
 
   }
 
   h1 {
 
-    font-size:
-      27px;
+    font-size: 27px;
 
   }
 
   .pwa-header-row {
 
-    align-items:
-      flex-start;
+    align-items: flex-start;
 
   }
 
   .pwa-title-group {
 
-    align-items:
-      flex-start;
+    align-items: flex-start;
 
   }
 
   .pwa-text-info h3 {
 
-    font-size:
-      16px;
+    font-size: 16px;
 
   }
 
   .pwa-text-info p {
 
-    font-size:
-      13px;
+    font-size: 13px;
 
   }
 
   .btn-how-to {
 
-    padding:
-      10px 14px;
+    padding: 10px 14px;
 
-    font-size:
-      14px;
+    font-size: 14px;
 
   }
 
   .info-grid {
 
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
 
-    padding:
-      15px;
+    padding: 15px;
 
   }
 
   .options-inline {
 
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns: repeat(2,1fr);
 
   }
 
   .form-buttons {
 
-    flex-direction:
-      column;
+    flex-direction: column;
 
   }
 
@@ -1884,57 +1505,68 @@ select:focus {
   #printButton,
   #resetButton {
 
-    width:
-      100%;
+    width: 100%;
 
   }
 
   .patient-info-summary {
 
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
 
   }
 
   #displaySummary p {
 
-    flex-direction:
-      column;
+    flex-direction: column;
 
-    align-items:
-      flex-start;
+    align-items: flex-start;
 
   }
 
   #printResult {
 
-    padding:
-      18px;
+    padding: 18px;
 
   }
 
   .install-option-icon,
   .install-option-icon img {
 
-    width:
-      65px;
+    width: 65px;
 
-    height:
-      65px;
+    height: 65px;
 
   }
 
   .install-option-text strong {
 
-    font-size:
-      22px;
+    font-size: 22px;
 
   }
 
   .install-option-text small {
 
-    font-size:
-      13px;
+    font-size: 13px;
+
+  }
+
+  .shortcut-card {
+
+    width: calc(100% - 20px);
+
+    padding: 28px 18px 20px;
+
+  }
+
+  .shortcut-card h2 {
+
+    font-size: 21px;
+
+  }
+
+  .shortcut-steps div {
+
+    font-size: 15px;
 
   }
 
@@ -1949,40 +1581,31 @@ select:focus {
 
   @page {
 
-    size:
-      A4;
+    size: A4;
 
-    margin:
-      1cm;
+    margin: 1cm;
 
   }
 
   body {
 
-    background:
-      white;
+    background: white;
 
-    padding:
-      0;
+    padding: 0;
 
   }
 
   .container {
 
-    max-width:
-      none;
+    max-width: none;
 
-    width:
-      100%;
+    width: 100%;
 
-    box-shadow:
-      none;
+    box-shadow: none;
 
-    border:
-      none;
+    border: none;
 
-    padding:
-      0;
+    padding: 0;
 
   }
 
@@ -1991,75 +1614,61 @@ select:focus {
   #installModal,
   #shortcutModal {
 
-    display:
-      none !important;
+    display: none !important;
 
   }
 
   #printResult {
 
-    display:
-      block !important;
+    display: block !important;
 
-    border:
-      none;
+    border: none;
 
-    padding:
-      0;
+    padding: 0;
 
-    box-shadow:
-      none;
+    box-shadow: none;
 
   }
 
   #displaySummary {
 
-    display:
-      none;
+    display: none;
 
   }
 
   #printTable {
 
-    display:
-      block;
+    display: block;
 
   }
 
   .result-table {
 
-    border:
-      2px solid #333;
+    border: 2px solid #333;
 
   }
 
   .result-table th,
   .result-table td {
 
-    border:
-      1px solid #333;
+    border: 1px solid #333;
 
   }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
-
 
 <!-- =====================================================
      INSTALL CARD
 ===================================================== -->
 
-<div class="install-app-box"
-     id="installBox">
+<div class="install-app-box" id="installBox">
 
   <div class="pwa-header-row">
 
@@ -2070,7 +1679,7 @@ select:focus {
         <img
           src="./icons/192.png"
           alt="ADHD Smart Check"
-          onerror="this.style.display='192.pgn';">
+          onerror="this.style.display='none';">
 
       </div>
 
@@ -2087,7 +1696,6 @@ select:focus {
       </div>
 
     </div>
-
 
     <button
       type="button"
@@ -2125,13 +1733,14 @@ select:focus {
 
     </button>
 
-
     <h2>
       ติดตั้งและสร้างทางลัด
     </h2>
 
 
-    <!-- INSTALL -->
+    <!-- =================================================
+         OPTION 1 : INSTALL
+    ================================================== -->
 
     <button
       type="button"
@@ -2142,7 +1751,8 @@ select:focus {
 
         <img
           src="./icons/192.png"
-          alt="ADHD Smart Check">
+          alt="ADHD Smart Check"
+          onerror="this.style.display='none';">
 
         <span class="download-badge">
 
@@ -2151,7 +1761,6 @@ select:focus {
         </span>
 
       </div>
-
 
       <div class="install-option-text">
 
@@ -2165,13 +1774,14 @@ select:focus {
 
       </div>
 
-
       <i class="fa-solid fa-chevron-right"></i>
 
     </button>
 
 
-    <!-- SHORTCUT -->
+    <!-- =================================================
+         OPTION 2 : SHORTCUT
+    ================================================== -->
 
     <button
       type="button"
@@ -2182,7 +1792,8 @@ select:focus {
 
         <img
           src="./icons/192.png"
-          alt="ADHD Smart Check">
+          alt="ADHD Smart Check"
+          onerror="this.style.display='none';">
 
         <span class="chrome-badge">
 
@@ -2191,7 +1802,6 @@ select:focus {
         </span>
 
       </div>
-
 
       <div class="install-option-text">
 
@@ -2204,7 +1814,6 @@ select:focus {
         </small>
 
       </div>
-
 
       <i class="fa-solid fa-chevron-right"></i>
 
@@ -2241,7 +1850,8 @@ select:focus {
     <img
       src="./icons/192.png"
       class="shortcut-logo"
-      alt="ADHD Smart Check">
+      alt="ADHD Smart Check"
+      onerror="this.style.display='none';">
 
 
     <h2>
@@ -2250,48 +1860,78 @@ select:focus {
 
 
     <p>
-      เปิดเมนู <strong>⋮</strong>
-      ของ Google Chrome
+      วิธีเพิ่มเว็บไซต์ลงในหน้าจอหลัก
+      ด้วย Google Chrome
     </p>
 
 
     <div class="shortcut-steps">
 
+      <!-- STEP 1 -->
+
       <div>
 
         <span>1</span>
 
-        กดเมนู
-        <strong>⋮</strong>
-        มุมขวาบน
+        <p>
+          เปิดเว็บไซต์ด้วย
+          <strong>Google Chrome</strong>
+        </p>
 
       </div>
 
+
+      <!-- STEP 2 -->
 
       <div>
 
         <span>2</span>
 
-        เลือก
-        <strong>
-          เพิ่มไปยังหน้าจอหลัก
-        </strong>
-        หรือ
-        <strong>
-          สร้างทางลัด
-        </strong>
+        <p>
+          กด <strong>⋮</strong>
+          มุมขวาบน
+        </p>
 
       </div>
 
+
+      <!-- STEP 3 -->
 
       <div>
 
         <span>3</span>
 
-        กด
-        <strong>
-          เพิ่ม
-        </strong>
+        <p>
+          เลือก
+          <strong>เพิ่มลงในหน้าจอหลัก</strong>
+        </p>
+
+      </div>
+
+
+      <!-- STEP 4 -->
+
+      <div>
+
+        <span>4</span>
+
+        <p>
+          กด <strong>เพิ่ม</strong>
+        </p>
+
+      </div>
+
+
+      <!-- STEP 5 -->
+
+      <div>
+
+        <span>5</span>
+
+        <p>
+          จะได้ไอคอน
+          <strong>ADHD Smart Check</strong>
+        </p>
 
       </div>
 
@@ -2324,18 +1964,14 @@ select:focus {
 
   </div>
 
-
   <h1>
     ADHD Smart Check
   </h1>
 
-
   <p class="subtitle">
-
     แบบประเมินสมาธิสั้น (SNAP-IV)
     -
     โรงพยาบาลดอนจาน
-
   </p>
 
 </div>
@@ -2346,7 +1982,6 @@ select:focus {
 ===================================================== -->
 
 <form id="snapForm">
-
 
 <h2>
 
@@ -2364,7 +1999,7 @@ select:focus {
 
 <label for="name">
 
-ชื่อผู้รับบริการ:
+  ชื่อผู้รับบริการ:
 
 </label>
 
@@ -2381,7 +2016,7 @@ select:focus {
 
 <label for="date">
 
-วันที่ประเมิน:
+  วันที่ประเมิน:
 
 </label>
 
@@ -2397,7 +2032,7 @@ select:focus {
 
 <label for="educationLevel">
 
-ระดับการศึกษา:
+  ระดับการศึกษา:
 
 </label>
 
@@ -2406,43 +2041,43 @@ select:focus {
   required>
 
 <option value="" disabled selected>
---- เลือกระดับการศึกษา ---
+  --- เลือกระดับการศึกษา ---
 </option>
 
 <option value="ป.1">
-ประถมศึกษาปีที่ 1
+  ประถมศึกษาปีที่ 1
 </option>
 
 <option value="ป.2">
-ประถมศึกษาปีที่ 2
+  ประถมศึกษาปีที่ 2
 </option>
 
 <option value="ป.3">
-ประถมศึกษาปีที่ 3
+  ประถมศึกษาปีที่ 3
 </option>
 
 <option value="ป.4">
-ประถมศึกษาปีที่ 4
+  ประถมศึกษาปีที่ 4
 </option>
 
 <option value="ป.5">
-ประถมศึกษาปีที่ 5
+  ประถมศึกษาปีที่ 5
 </option>
 
 <option value="ป.6">
-ประถมศึกษาปีที่ 6
+  ประถมศึกษาปีที่ 6
 </option>
 
 <option value="มัธยมต้น">
-มัธยมศึกษาตอนต้น
+  มัธยมศึกษาตอนต้น
 </option>
 
 <option value="มัธยมปลาย">
-มัธยมศึกษาตอนปลาย
+  มัธยมศึกษาตอนปลาย
 </option>
 
 <option value="อื่นๆ">
-อื่นๆ
+  อื่นๆ
 </option>
 
 </select>
@@ -2453,14 +2088,10 @@ select:focus {
 <div class="info-group">
 
 <label>
-
-ประเมินโดย:
-
+  ประเมินโดย:
 </label>
 
-
 <div class="assessor-options">
-
 
 <div class="assessor-box">
 
@@ -2473,9 +2104,9 @@ select:focus {
 
 <label for="as_parent">
 
-<i class="fa-solid fa-user-tie"></i>
+  <i class="fa-solid fa-user-tie"></i>
 
-ผู้ปกครอง
+  ผู้ปกครอง
 
 </label>
 
@@ -2492,14 +2123,13 @@ select:focus {
 
 <label for="as_teacher">
 
-<i class="fa-solid fa-chalkboard-user"></i>
+  <i class="fa-solid fa-chalkboard-user"></i>
 
-ครู
+  ครู
 
 </label>
 
 </div>
-
 
 </div>
 
@@ -2525,46 +2155,42 @@ select:focus {
 โปรดเลือกระดับความรุนแรงของอาการ
 ในแต่ละข้อตามที่ท่านสังเกตเห็นพฤติกรรมจริง
 
-
 <div class="instruction-legend">
 
 <span>
 
 <i class="fa-regular fa-face-smile"
-   style="color:var(--lvl-0)">
+style="color:var(--lvl-0)">
 </i>
 
 ไม่เลย (0)
 
 </span>
 
-
 <span>
 
 <i class="fa-regular fa-face-meh"
-   style="color:var(--lvl-1)">
+style="color:var(--lvl-1)">
 </i>
 
 เล็กน้อย (1)
 
 </span>
 
-
 <span>
 
 <i class="fa-regular fa-face-frown"
-   style="color:var(--lvl-2)">
+style="color:var(--lvl-2)">
 </i>
 
 ค่อนข้างมาก (2)
 
 </span>
 
-
 <span>
 
 <i class="fa-solid fa-face-grimace"
-   style="color:var(--lvl-3)">
+style="color:var(--lvl-3)">
 </i>
 
 มาก (3)
@@ -2584,7 +2210,7 @@ select:focus {
 
 <div class="question-group">
 
-<div id="questionContainer"></div>
+  <div id="questionContainer"></div>
 
 </div>
 
@@ -2594,7 +2220,6 @@ select:focus {
 ===================================================== -->
 
 <div class="form-buttons">
-
 
 <button
   type="button"
@@ -2631,9 +2256,7 @@ select:focus {
 
 </button>
 
-
 </div>
-
 
 </form>
 
@@ -2642,28 +2265,23 @@ select:focus {
      RESULT
 ===================================================== -->
 
-<div
-  id="printResult">
-
+<div id="printResult">
 
 <div class="result-header">
 
 <i class="fa-solid fa-square-poll-vertical"
-   style="font-size:26px">
+style="font-size:26px">
 </i>
 
 <h2>
-
 สรุปผลการประเมินพฤติกรรม
 ADHD Smart Check (SNAP-IV)
-
 </h2>
 
 </div>
 
 
 <div class="patient-info-summary">
-
 
 <div>
 
@@ -2708,7 +2326,6 @@ ADHD Smart Check (SNAP-IV)
 
 </div>
 
-
 </div>
 
 
@@ -2716,23 +2333,22 @@ ADHD Smart Check (SNAP-IV)
 
 
 <div
-  id="descriptionPrint"
-  style="
-    margin-top:25px;
-    padding:15px 20px;
-    background:#f1f5f9;
-    border-radius:12px;
-    font-size:14px;
-    border:1px solid #e2e8f0;
-  ">
-
+id="descriptionPrint"
+style="
+margin-top:25px;
+padding:15px 20px;
+background:#f1f5f9;
+border-radius:12px;
+font-size:14px;
+border:1px solid #e2e8f0;
+">
 
 <h4
-  style="
-    color:var(--primary-dark);
-    margin:0 0 8px;
-    font-size:15px;
-  ">
+style="
+color:var(--primary-dark);
+margin:0 0 8px;
+font-size:15px;
+">
 
 <i class="fa-solid fa-circle-exclamation"></i>
 
@@ -2772,9 +2388,7 @@ ADHD Smart Check (SNAP-IV)
 
 <div id="printTable"></div>
 
-
 </div>
-
 
 </div>
 
@@ -3156,7 +2770,6 @@ function loadDraft(){
           `input[name="q${q}"][value="${data.answers[q]}"]`
         );
 
-
         if(radio)
           radio.checked = true;
 
@@ -3165,6 +2778,7 @@ function loadDraft(){
     }
 
   }
+
   catch(error){
 
     console.log(
@@ -3329,11 +2943,13 @@ function calculateAndDisplay(){
       inattention += value;
 
     }
+
     else if(i<=18){
 
       hyperactivity += value;
 
     }
+
     else{
 
       oppositional += value;
@@ -3609,6 +3225,7 @@ function calculateAndDisplay(){
 
   <strong style="font-size:20px">
 
+
   ${
     overallRisk
     ? "⚠️ เข้าเกณฑ์คัดกรอง"
@@ -3624,6 +3241,7 @@ function calculateAndDisplay(){
 
   <span>
 
+
   ${
     overallRisk
 
@@ -3632,6 +3250,7 @@ function calculateAndDisplay(){
     : "ไม่พบคะแนนเข้าเกณฑ์คัดกรองตามเกณฑ์ที่กำหนด"
 
   }
+
 
   </span>
 
@@ -4122,16 +3741,13 @@ function printReport(){
 
   </head>
 
-
   <body>
-
 
   <h1>
 
   ADHD Smart Check (SNAP-IV)
 
   </h1>
-
 
   <p
     style="
@@ -4145,9 +3761,7 @@ function printReport(){
 
   </p>
 
-
   ${reportContent}
-
 
   </body>
 
@@ -4257,55 +3871,55 @@ let deferredPrompt = null;
 
 const installBox =
 document.getElementById(
-  "installBox"
+"installBox"
 );
 
 
 const howInstallButton =
 document.getElementById(
-  "howInstallButton"
+"howInstallButton"
 );
 
 
 const installModal =
 document.getElementById(
-  "installModal"
+"installModal"
 );
 
 
 const closeInstallModal =
 document.getElementById(
-  "closeInstallModal"
+"closeInstallModal"
 );
 
 
 const installPwaButton =
 document.getElementById(
-  "installPwaButton"
+"installPwaButton"
 );
 
 
 const shortcutButton =
 document.getElementById(
-  "shortcutButton"
+"shortcutButton"
 );
 
 
 const shortcutModal =
 document.getElementById(
-  "shortcutModal"
+"shortcutModal"
 );
 
 
 const closeShortcutModal =
 document.getElementById(
-  "closeShortcutModal"
+"closeShortcutModal"
 );
 
 
 const shortcutOk =
 document.getElementById(
-  "shortcutOk"
+"shortcutOk"
 );
 
 
@@ -4335,19 +3949,19 @@ function isStandalone(){
 ========================================================= */
 
 window.addEventListener(
-  "beforeinstallprompt",
-  event => {
+"beforeinstallprompt",
+event => {
 
-    event.preventDefault();
+  event.preventDefault();
 
-    deferredPrompt =
-    event;
+  deferredPrompt =
+  event;
 
-    console.log(
-      "ADHD Smart Check สามารถติดตั้งได้"
-    );
+  console.log(
+    "ADHD Smart Check สามารถติดตั้งได้"
+  );
 
-  }
+}
 );
 
 
@@ -4356,13 +3970,13 @@ window.addEventListener(
 ========================================================= */
 
 howInstallButton.addEventListener(
-  "click",
-  () => {
+"click",
+() => {
 
-    installModal.style.display =
-    "block";
+  installModal.style.display =
+  "block";
 
-  }
+}
 );
 
 
@@ -4371,13 +3985,30 @@ howInstallButton.addEventListener(
 ========================================================= */
 
 closeInstallModal.addEventListener(
-  "click",
-  () => {
+"click",
+() => {
 
-    installModal.style.display =
-    "none";
+  installModal.style.display =
+  "none";
 
-  }
+}
+);
+
+
+/* =========================================================
+   CLOSE INSTALL BY OVERLAY
+========================================================= */
+
+document.querySelector(
+".install-modal-overlay"
+).addEventListener(
+"click",
+() => {
+
+  installModal.style.display =
+  "none";
+
+}
 );
 
 
@@ -4386,49 +4017,49 @@ closeInstallModal.addEventListener(
 ========================================================= */
 
 installPwaButton.addEventListener(
-  "click",
-  async () => {
+"click",
+async () => {
 
-    if(!deferredPrompt){
+  if(!deferredPrompt){
 
-      alert(
+    alert(
 
-        "Chrome ยังไม่แสดงปุ่มติดตั้งอัตโนมัติ\n\n" +
+      "Chrome ยังไม่แสดงปุ่มติดตั้งอัตโนมัติ\n\n" +
 
-        "ให้กดเมนู ⋮ ของ Chrome\n" +
+      "ให้กดเมนู ⋮ ของ Chrome\n" +
 
-        "แล้วเลือก \"ติดตั้งแอป\" หรือ " +
+      "แล้วเลือก \"ติดตั้งแอป\" หรือ " +
 
-        "\"เพิ่มไปยังหน้าจอหลัก\""
+      "\"เพิ่มลงในหน้าจอหลัก\""
 
-      );
-
-      return;
-
-    }
-
-
-    deferredPrompt.prompt();
-
-
-    const result =
-    await deferredPrompt.userChoice;
-
-
-    console.log(
-      "Install result:",
-      result.outcome
     );
 
-
-    deferredPrompt =
-    null;
-
-
-    installModal.style.display =
-    "none";
+    return;
 
   }
+
+
+  deferredPrompt.prompt();
+
+
+  const result =
+  await deferredPrompt.userChoice;
+
+
+  console.log(
+    "Install result:",
+    result.outcome
+  );
+
+
+  deferredPrompt =
+  null;
+
+
+  installModal.style.display =
+  "none";
+
+}
 );
 
 
@@ -4437,17 +4068,17 @@ installPwaButton.addEventListener(
 ========================================================= */
 
 shortcutButton.addEventListener(
-  "click",
-  () => {
+"click",
+() => {
 
-    installModal.style.display =
-    "none";
+  installModal.style.display =
+  "none";
 
 
-    shortcutModal.style.display =
-    "block";
+  shortcutModal.style.display =
+  "block";
 
-  }
+}
 );
 
 
@@ -4464,14 +4095,26 @@ function closeShortcut(){
 
 
 closeShortcutModal.addEventListener(
-  "click",
-  closeShortcut
+"click",
+closeShortcut
 );
 
 
 shortcutOk.addEventListener(
-  "click",
-  closeShortcut
+"click",
+closeShortcut
+);
+
+
+/* =========================================================
+   CLOSE SHORTCUT BY OVERLAY
+========================================================= */
+
+document.querySelector(
+".shortcut-overlay"
+).addEventListener(
+"click",
+closeShortcut
 );
 
 
@@ -4480,26 +4123,26 @@ shortcutOk.addEventListener(
 ========================================================= */
 
 window.addEventListener(
-  "appinstalled",
-  () => {
+"appinstalled",
+() => {
 
-    console.log(
-      "ADHD Smart Check ติดตั้งสำเร็จ"
-    );
-
-
-    deferredPrompt =
-    null;
+  console.log(
+    "ADHD Smart Check ติดตั้งสำเร็จ"
+  );
 
 
-    installModal.style.display =
-    "none";
+  deferredPrompt =
+  null;
 
 
-    installBox.style.display =
-    "none";
+  installModal.style.display =
+  "none";
 
-  }
+
+  installBox.style.display =
+  "none";
+
+}
 );
 
 
@@ -4528,29 +4171,30 @@ if(
     () => {
 
       navigator.serviceWorker
-      .register("./sw.js")
 
-      .then(
-        registration => {
+        .register("./sw.js")
 
-          console.log(
-            "ADHD Smart Check PWA Ready",
-            registration.scope
-          );
+        .then(
+          registration => {
 
-        }
-      )
+            console.log(
+              "ADHD Smart Check PWA Ready",
+              registration.scope
+            );
 
-      .catch(
-        error => {
+          }
+        )
 
-          console.error(
-            "Service Worker Error:",
-            error
-          );
+        .catch(
+          error => {
 
-        }
-      );
+            console.error(
+              "Service Worker Error:",
+              error
+            );
+
+          }
+        );
 
     }
   );
@@ -4559,7 +4203,5 @@ if(
 
 </script>
 
-
 </body>
-
 </html>
