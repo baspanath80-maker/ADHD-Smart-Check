@@ -1,44 +1,89 @@
-<!DOCTYPE html>  
-<html lang="th">  
-<head>  
-<meta charset="UTF-8" />  
-<meta name="viewport" content="width=device-width, initial-scale=1" />  
-<title>ADHD Smart Screen (SNAP-IV)</title>  
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
 
-<!-- Favicon & Theme Color Settings -->
-<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="theme-color" content="#ffffff">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">   
-<!-- Font Awesome สำหรับไอคอน -->  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-<style>  
-  /* Modern CSS Variable & Global Styles */  
-  :root {  
-    --primary: #1e88e5;  
-    --primary-dark: #1565c0;  
-    --primary-light: #e3f2fd;  
-    --text-main: #2c3e50;  
-    --text-muted: #7f8c8d;  
-    --bg-body: #f4f7f9;  
-    --card-bg: #ffffff;  
-    --shadow-soft: 0 15px 35px rgba(21, 101, 192, 0.08);  
-    --shadow-card: 0 8px 25px rgba(0, 0, 0, 0.06);  
-    --transition-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);  
-    
-    /* Section & Rating Colors */  
-    --inattention-color: #ff4a5a;  
-    --hyperactivity-color: #29b6f6;  
-    --oppositional-color: #ff9800;  
-    --success-color: #2e7d32;  
-    --danger-color: #c62828;  
-    
-    --lvl-0: #2e7d32; /* ไม่เลย - เขียว */
-    --lvl-1: #f59f00; /* เล็กน้อย - ส้มเหลือง */
-    --lvl-2: #e65100; /* ค่อนข้างมาก - แสด */
-    --lvl-3: #c62828; /* มาก - แดง */
-  }
+<title>ADHD Smart Screen (SNAP-IV)</title>
+
+<!-- =========================
+     PWA
+========================= -->
+<meta name="theme-color" content="#1e88e5">
+<meta name="background-color" content="#f4f7f9">
+<meta name="description"
+      content="ADHD Smart Screen ระบบคัดกรองภาวะสมาธิสั้นด้วย SNAP-IV โรงพยาบาลดอนจาน">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ADHD Smart Screen">
+
+<link rel="manifest" href="./manifest.json">
+
+<!-- Favicon -->
+<link rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicons/favicon-16x16.png">
+
+<link rel="apple-touch-icon"
+      href="./icons/icon-180.png">
+
+<meta name="msapplication-TileColor" content="#1e88e5">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+:root {
+  --primary: #1e88e5;
+  --primary-dark: #1565c0;
+  --primary-light: #e3f2fd;
+
+  --text-main: #2c3e50;
+  --text-muted: #7f8c8d;
+
+  --bg-body: #f4f7f9;
+  --card-bg: #ffffff;
+
+  --shadow-soft:
+    0 15px 35px rgba(21, 101, 192, 0.08);
+
+  --shadow-card:
+    0 8px 25px rgba(0, 0, 0, 0.06);
+
+  --transition-bounce:
+    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --inattention-color: #ff4a5a;
+  --hyperactivity-color: #29b6f6;
+  --oppositional-color: #ff9800;
+
+  --success-color: #2e7d32;
+  --danger-color: #c62828;
+
+  --lvl-0: #2e7d32;
+  --lvl-1: #f59f00;
+  --lvl-2: #e65100;
+  --lvl-3: #c62828;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Sarabun', sans-serif;
@@ -49,6 +94,12 @@ body {
   line-height: 1.6;
 }
 
+button,
+input,
+select {
+  font-family: 'Sarabun', sans-serif;
+}
+
 .container {
   max-width: 850px;
   margin: 0 auto;
@@ -57,11 +108,56 @@ body {
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(21, 101, 192, 0.08);
-  transform: translateY(0);
-  transition: transform 0.3s ease;
 }
 
-/* Header Section Styling */
+/* =========================
+   PWA INSTALL
+========================= */
+
+.install-app-box {
+  display: none;
+  background: linear-gradient(
+    135deg,
+    #e3f2fd,
+    #f5fbff
+  );
+  border: 1px solid #90caf9;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.install-app-box.show {
+  display: block;
+}
+
+.install-app-box h3 {
+  margin: 0 0 8px;
+  background: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.install-button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.install-button:hover {
+  background: var(--primary-dark);
+}
+
+/* =========================
+   HEADER
+========================= */
+
 .header-brand {
   text-align: center;
   margin-bottom: 40px;
@@ -78,14 +174,25 @@ body {
   justify-content: center;
   border-radius: 50px;
   margin: 0 auto 15px auto;
-  box-shadow: inset 0 0 10px rgba(30, 136, 229, 0.1);
+  box-shadow:
+    inset 0 0 10px rgba(30, 136, 229, 0.1);
   animation: pulse 2s infinite ease-in-out;
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
 }
 
 h1 {
@@ -93,7 +200,6 @@ h1 {
   margin: 0 0 5px 0;
   font-size: 32px;
   font-weight: 700;
-  letter-spacing: -0.5px;
 }
 
 .subtitle {
@@ -124,7 +230,10 @@ h3 {
   gap: 10px;
 }
 
-/* Form Layout and Inputs */
+/* =========================
+   FORM
+========================= */
+
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -135,45 +244,57 @@ h3 {
   border-radius: 18px;
   border: 1px solid #edf2f7;
 }
+
 .info-group {
   display: flex;
   flex-direction: column;
 }
+
 label {
   margin-bottom: 8px;
   font-weight: 600;
   font-size: 15px;
   color: #4a5568;
 }
-input[type="text"], input[type="date"], select {
+
+input[type="text"],
+input[type="date"],
+select {
   width: 100%;
   padding: 12px 16px;
   border: 1.5px solid #e2e8f0;
   border-radius: 12px;
   box-sizing: border-box;
   font-size: 15px;
-  font-family: 'Sarabun', sans-serif;
   background-color: #fff;
   color: var(--text-main);
   transition: all 0.3s var(--transition-bounce);
 }
-input[type="text"]:focus, input[type="date"]:focus, select:focus {
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.15);
-  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 4px rgba(30, 136, 229, 0.15);
 }
 
-/* Modern Assessor Radios */
+/* =========================
+   ASSESSOR
+========================= */
+
 .assessor-options {
   display: flex;
   gap: 15px;
   margin-top: 5px;
 }
+
 .assessor-box {
   flex: 1;
   position: relative;
 }
+
 .assessor-box input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -182,6 +303,7 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   cursor: pointer;
   z-index: 2;
 }
+
 .assessor-box label {
   display: flex;
   align-items: center;
@@ -197,16 +319,21 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   font-weight: 500;
   margin: 0;
 }
+
 .assessor-box input[type="radio"]:checked + label {
   background-color: var(--primary-light);
   border-color: var(--primary);
   color: var(--primary-dark);
   font-weight: 600;
   transform: scale(1.03);
-  box-shadow: 0 4px 10px rgba(30, 136, 229, 0.1);
+  box-shadow:
+    0 4px 10px rgba(30, 136, 229, 0.1);
 }
 
-/* Instruction Banner */
+/* =========================
+   INSTRUCTION
+========================= */
+
 .instruction-banner {
   font-weight: 500;
   margin: 35px 0;
@@ -219,13 +346,16 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   display: flex;
   gap: 15px;
   align-items: flex-start;
-  box-shadow: 0 4px 10px rgba(252, 196, 25, 0.05);
+  box-shadow:
+    0 4px 10px rgba(252, 196, 25, 0.05);
 }
+
 .instruction-banner i.banner-icon {
   font-size: 20px;
   color: #f59f00;
   margin-top: 2px;
 }
+
 .instruction-legend {
   margin-top: 8px;
   display: flex;
@@ -233,13 +363,17 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   flex-wrap: wrap;
   font-weight: 600;
 }
+
 .instruction-legend span {
   display: inline-flex;
   align-items: center;
   gap: 5px;
 }
 
-/* Question Groups */
+/* =========================
+   QUESTIONS
+========================= */
+
 .question-group {
   padding: 10px 0;
   margin-bottom: 35px;
@@ -255,7 +389,11 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   border-bottom: 1px solid #edf2f7;
   transition: all 0.25s ease;
 }
-.question:last-child { border-bottom: none; }
+
+.question:last-child {
+  border-bottom: none;
+}
+
 .question > label {
   display: block;
   font-size: 16px;
@@ -264,17 +402,22 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   color: var(--text-main);
 }
 
-/* Modern Answer Radio Segment Custom UI with Icons */
+/* =========================
+   ANSWERS
+========================= */
+
 .options-inline {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-top: 12px;
 }
+
 .options-inline input[type="radio"] {
   position: absolute;
   opacity: 0;
 }
+
 .options-inline label {
   display: flex;
   flex-direction: column;
@@ -293,67 +436,73 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   text-align: center;
   gap: 4px;
 }
+
 .options-inline label i {
   font-size: 22px;
   margin-bottom: 2px;
-  transition: transform 0.2s ease;
 }
 
-/* Default Color Icon Style on Hover */
-.options-inline label[for$="_0"] i { color: var(--lvl-0); }
-.options-inline label[for$="_1"] i { color: var(--lvl-1); }
-.options-inline label[for$="_2"] i { color: var(--lvl-2); }
-.options-inline label[for$="_3"] i { color: var(--lvl-3); }
+.options-inline label[for$="_0"] i {
+  color: var(--lvl-0);
+}
+
+.options-inline label[for$="_1"] i {
+  color: var(--lvl-1);
+}
+
+.options-inline label[for$="_2"] i {
+  color: var(--lvl-2);
+}
+
+.options-inline label[for$="_3"] i {
+  color: var(--lvl-3);
+}
 
 .options-inline label:hover {
   background-color: #f8fafc;
   border-color: #cbd5e1;
   transform: translateY(-2px);
 }
-.options-inline label:hover i {
-  transform: scale(1.15);
-}
 
-/* Selected Radio Styling */
 .options-inline input[type="radio"]:checked + label {
   color: white;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.15);
   font-weight: 600;
   transform: translateY(-3px) scale(1.02);
 }
+
 .options-inline input[type="radio"]:checked + label i {
   color: white !important;
-  transform: scale(1.1);
 }
 
 .options-inline input[type="radio"][value="0"]:checked + label {
   background-color: var(--lvl-0);
-  border-color: #1b5e20;
-  box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
-}
-.options-inline input[type="radio"][value="1"]:checked + label {
-  background-color: var(--lvl-1);
-  border-color: #e67e22;
-  box-shadow: 0 6px 15px rgba(245, 159, 0, 0.3);
-}
-.options-inline input[type="radio"][value="2"]:checked + label {
-  background-color: var(--lvl-2);
-  border-color: #d35400;
-  box-shadow: 0 6px 15px rgba(230, 81, 0, 0.3);
-}
-.options-inline input[type="radio"][value="3"]:checked + label {
-  background-color: var(--lvl-3);
-  border-color: #b71c1c;
-  box-shadow: 0 6px 15px rgba(198, 40, 40, 0.3);
 }
 
-/* Modern Action Buttons Container */
+.options-inline input[type="radio"][value="1"]:checked + label {
+  background-color: var(--lvl-1);
+}
+
+.options-inline input[type="radio"][value="2"]:checked + label {
+  background-color: var(--lvl-2);
+}
+
+.options-inline input[type="radio"][value="3"]:checked + label {
+  background-color: var(--lvl-3);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
 .form-buttons {
   display: flex;
   gap: 15px;
   margin-top: 40px;
   justify-content: center;
 }
+
 .form-buttons button {
   padding: 14px 28px;
   color: white;
@@ -364,21 +513,35 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   font-weight: 600;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   transition: all 0.25s var(--transition-bounce);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-#calculateButton { background-color: var(--primary); width: 50%; justify-content: center; }
-#calculateButton:hover { background-color: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(30, 136, 229, 0.4); }
+#calculateButton {
+  background-color: var(--primary);
+  width: 50%;
+}
 
-#printButton { background-color: #475569; }
-#printButton:hover { background-color: #334155; transform: translateY(-3px); box-shadow: 0 8px 15px rgba(71, 85, 105, 0.3); }
+#calculateButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+}
 
-#resetButton { background-color: #ef4444; }
-#resetButton:hover { background-color: #dc2626; transform: translateY(-3px); box-shadow: 0 8px 15px rgba(239, 68, 68, 0.3); }
+#printButton {
+  background-color: #475569;
+}
 
-/* Result Modern Dashboard Display */
+#resetButton {
+  background-color: #ef4444;
+}
+
+/* =========================
+   RESULT
+========================= */
+
 #printResult {
   margin-top: 40px;
   border: 2px solid var(--primary-light);
@@ -389,9 +552,19 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   box-shadow: var(--shadow-soft);
   animation: fadeInBounce 0.5s var(--transition-bounce);
 }
+
 @keyframes fadeInBounce {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 }
 
 .result-header {
@@ -403,7 +576,10 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   gap: 12px;
   color: var(--primary-dark);
 }
-.result-header h2 { margin: 0; }
+
+.result-header h2 {
+  margin: 0;
+}
 
 .patient-info-summary {
   display: grid;
@@ -423,6 +599,7 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   gap: 12px;
   margin-bottom: 30px;
 }
+
 #displaySummary p {
   font-size: 16px;
   margin: 0;
@@ -433,11 +610,7 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-  transition: transform 0.2s ease;
-}
-#displaySummary p:hover {
-  transform: translateX(4px);
+  gap: 12px;
 }
 
 .status-badge {
@@ -448,613 +621,1957 @@ input[type="text"]:focus, input[type="date"]:focus, select:focus {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.risk-badge { background-color: #fee2e2; color: var(--danger-color); animation: shake 0.5s ease; }
-.normal-badge { background-color: #dcfce7; color: var(--success-color); }
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+  white-space: nowrap;
 }
 
-.risk { color: var(--danger-color); font-weight: bold; }
-.normal { color: var(--success-color); font-weight: bold; }
-
-/* Modern Result Table */
-#printTable { display: none; }
-.result-table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-card); }
-.result-table th, .result-table td { padding: 14px 18px; text-align: left; font-size: 15px; }
-.result-table th { background-color: var(--primary-dark); color: white; font-weight: 600; }
-.result-table td { background-color: #ffffff; border-bottom: 1px solid #e2e8f0; color: #334155; }
-.result-table tr:last-child td { border-bottom: none; }
-
-.result-table .valid-result td:last-child { color: var(--success-color); font-weight: bold; }
-.result-table .invalid-result td:last-child { color: var(--danger-color); font-weight: bold; }
-
-/* Print Media Layout Query styling */
-@media print {
-  body { background-color: white; padding: 0; margin: 1cm; }
-  .container { box-shadow: none; padding: 0; border: none; }
-  #snapForm, #calculateButton, #resetButton, #printButton { display: none; }
-  #printResult { border: none; padding: 0; display: block !important; }
-  #displaySummary { display: none; }
-  #printTable { display: block; }
-  .result-table { border: 2px solid #333; box-shadow: none; }
-  .result-table th, .result-table td { border-color: #333; border-style: solid; }
-  h1, h2, h3, h4, p { color: #000 !important; }
-  .risk { color: #d32f2f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .normal { color: #388e3c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .result-table .valid-result td:last-child { color: #388e3c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .result-table .invalid-result td:last-child { color: #d32f2f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.risk-badge {
+  background-color: #fee2e2;
+  color: var(--danger-color);
 }
 
-/* Responsive Design */
+.normal-badge {
+  background-color: #dcfce7;
+  color: var(--success-color);
+}
+
+.risk {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.normal {
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+#printTable {
+  display: none;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.result-table th,
+.result-table td {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.result-table th {
+  background-color: var(--primary-dark);
+  color: white;
+  font-weight: 600;
+}
+
+.result-table td {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.result-table .valid-result td:last-child {
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+.result-table .invalid-result td:last-child {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 768px) {
-  .container { padding: 25px 15px; }
-  .info-grid { grid-template-columns: 1fr; padding: 15px; }
-  .options-inline { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .form-buttons { flex-direction: column; gap: 12px; }
-  .form-buttons button { width: 100% !important; justify-content: center; }
-  .patient-info-summary { grid-template-columns: 1fr; gap: 10px; }
-  #displaySummary p { flex-direction: column; align-items: flex-start; gap: 5px; }
-}
-</style>
 
-</head>  
-<body>  
-  <div class="container" id="mainContainer">    
-    <div class="header-brand">  
-      <div class="brand-icon">  
-        <i class="fa-solid fa-magnifying-glass-chart"></i>  
-      </div>  
-      <h1>ADHD Smart Screen</h1>  
-      <p class="subtitle">แบบประเมินสมาธิสั้น (SNAP-IV) - โรงพยาบาลดอนจาน</p>  
-    </div>  
-    
-    <form id="snapForm">    
-      <h2><i class="fa-solid fa-id-card-clip"></i> ข้อมูลพื้นฐานของผู้รับบริการ</h2>    
-      <div class="info-grid">  
-        <div class="info-group">  
-          <label for="name">ชื่อผู้รับบริการ:</label>  
-          <input type="text" id="name" placeholder="ระบุชื่อ-นามสกุล" required />  
-        </div>  
-        
-        <div class="info-group">  
-          <label for="date">วันที่ประเมิน:</label>  
-          <input type="date" id="date" required />  
-        </div>  
-  
-        <div class="info-group">  
-          <label for="educationLevel">ระดับการศึกษา:</label>  
-          <select id="educationLevel" required>  
-            <option value="" disabled selected>--- เลือกระดับการศึกษา ---</option>  
-            <option value="ป.1">ประถมศึกษาปีที่ 1</option>  
-            <option value="ป.2">ประถมศึกษาปีที่ 2</option>  
-            <option value="ป.3">ประถมศึกษาปีที่ 3</option>  
-            <option value="ป.4">ประถมศึกษาปีที่ 4</option>  
-            <option value="ป.5">ประถมศึกษาปีที่ 5</option>  
-            <option value="ป.6">ประถมศึกษาปีที่ 6</option>  
-            <option value="มัธยมต้น">มัธยมศึกษาตอนต้น</option>  
-            <option value="มัธยมปลาย">มัธยมศึกษาตอนปลาย</option>  
-            <option value="อื่นๆ">อื่นๆ</option>  
-          </select>  
-        </div>  
-
-        <div class="info-group">  
-          <label>ประเมินโดย:</label>  
-          <div class="assessor-options">  
-            <div class="assessor-box">  
-              <input type="radio" name="assessor" value="ผู้ปกครอง" id="as_parent" required />  
-              <label for="as_parent"><i class="fa-solid fa-user-tie"></i> ผู้ปกครอง</label>  
-            </div>  
-            <div class="assessor-box">  
-              <input type="radio" name="assessor" value="ครู" id="as_teacher" />  
-              <label for="as_teacher"><i class="fa-solid fa-chalkboard-user"></i> ครู</label>  
-            </div>  
-          </div>  
-        </div>  
-      </div>    
-
-      <div class="instruction-banner">  
-        <i class="fa-solid fa-circle-info banner-icon"></i>  
-        <div>  
-          <strong>คำแนะนำสำหรับผู้ประเมิน:</strong> โปรดเลือกคลิกเลือกระดับความรุนแรงของอาการในแต่ละข้อตามที่ท่านสังเกตเห็นพฤติกรรมจริงในระยะนี้:  
-          <div class="instruction-legend">  
-            <span><i class="fa-regular fa-face-smile" style="color:var(--lvl-0)"></i> ไม่เลย (0)</span>  
-            <span><i class="fa-regular fa-face-meh" style="color:var(--lvl-1)"></i> เล็กน้อย (1)</span>  
-            <span><i class="fa-regular fa-face-frown" style="color:var(--lvl-2)"></i> ค่อนข้างมาก (2)</span>  
-            <span><i class="fa-solid fa-face-grimace" style="color:var(--lvl-3)"></i> มาก (3)</span>  
-          </div>  
-        </div>  
-      </div>    
-
-      <!-- ด้านขาดสมาธิ -->    
-      <div class="question-group">  
-        <h3><i class="fa-solid fa-head-side-virus" style="color:var(--inattention-color);"></i> ด้านขาดสมาธิ (ข้อ 1-9)</h3>  
-        
-        <div class="question"><label>1. มักไม่ละเอียดรอบคอบหรือสะเพร่าในการทำงานต่าง ๆ เช่น การบ้าน</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q1" id="q1_0" value="0" required /><label for="q1_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q1" id="q1_1" value="1"/><label for="q1_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q1" id="q1_2" value="2"/><label for="q1_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q1" id="q1_3" value="3"/><label for="q1_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-        
-        <div class="question"><label>2. ทำอะไรนาน ๆ ไม่ได้</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q2" id="q2_0" value="0" required/><label for="q2_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q2" id="q2_1" value="1"/><label for="q2_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q2" id="q2_2" value="2"/><label for="q2_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q2" id="q2_3" value="3"/><label for="q2_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>3. ดูเหมือนไม่ค่อยฟังเวลามีคนพูดด้วย</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q3" id="q3_0" value="0" required/><label for="q3_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q3" id="q3_1" value="1"/><label for="q3_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q3" id="q3_2" value="2"/><label for="q3_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q3" id="q3_3" value="3"/><label for="q3_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>4. ทำตามคำสั่งไม่ค่อยครบ เช่น ไม่ค่อยทำการบ้านให้เสร็จ</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q4" id="q4_0" value="0" required/><label for="q4_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q4" id="q4_1" value="1"/><label for="q4_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q4" id="q4_2" value="2"/><label for="q4_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q4" id="q4_3" value="3"/><label for="q4_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>5. จัดระเบียบงานและกิจกรรมต่าง ๆ ไม่เป็น</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q5" id="q5_0" value="0" required/><label for="q5_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q5" id="q5_1" value="1"/><label for="q5_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q5" id="q5_2" value="2"/><label for="q5_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q5" id="q5_3" value="3"/><label for="q5_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>6. มักหลีกเลี่ยงกิจกรรมที่ต้องใช้ความอดทนในการทำให้สำเร็จ</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q6" id="q6_0" value="0" required /><label for="q6_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q6" id="q6_1" value="1" /><label for="q6_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q6" id="q6_2" value="2" /><label for="q6_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q6" id="q6_3" value="3" /><label for="q6_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>7. ทำของหายบ่อย ๆ เช่น ของเล่น สมุดจดงาน เครื่องเขียน</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q7" id="q7_0" value="0" required /><label for="q7_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q7" id="q7_1" value="1" /><label for="q7_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q7" id="q7_2" value="2" /><label for="q7_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q7" id="q7_3" value="3" /><label for="q7_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>8. วอกแวกง่าย</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q8" id="q8_0" value="0" required /><label for="q8_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q8" id="q8_1" value="1" /><label for="q8_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q8" id="q8_2" value="2" /><label for="q8_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q8" id="q8_3" value="3" /><label for="q8_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>9. ขี้ลืม</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q9" id="q9_0" value="0" required /><label for="q9_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q9" id="q9_1" value="1" /><label for="q9_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q9" id="q9_2" value="2" /><label for="q9_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q9" id="q9_3" value="3" /><label for="q9_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-      </div>    
-
-      <!-- ด้านซน อยู่ไม่นิ่ง -->    
-      <div class="question-group">  
-        <h3><i class="fa-solid fa-child-holding-hands" style="color:var(--hyperactivity-color);"></i> ด้านซน อยู่ไม่นิ่ง/หุนหันพลันแล่น (ข้อ 10-18)</h3>  
-        
-        <div class="question"><label>10. มือเท้ายุกยิก นั่งบิดไปบิดมา</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q10" id="q10_0" value="0" required /><label for="q10_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q10" id="q10_1" value="1" /><label for="q10_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q10" id="q10_2" value="2" /><label for="q10_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q10" id="q10_3" value="3" /><label for="q10_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>11. นั่งไม่ติดที่ ชอบลุกจากที่นั่งในชั้นเรียนหรือจากที่ที่ควรจะนั่งเรียบร้อย</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q11" id="q11_0" value="0" required /><label for="q11_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q11" id="q11_1" value="1" /><label for="q11_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q11" id="q11_2" value="2" /><label for="q11_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q11" id="q11_3" value="3" /><label for="q11_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>12. วิ่งหรือปีนป่ายมากเกินควรอย่างไม่รู้กาลเทศะ</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q12" id="q12_0" value="0" required /><label for="q12_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q12" id="q12_1" value="1" /><label for="q12_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q12" id="q12_2" value="2" /><label for="q12_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q12" id="q12_3" value="3" /><label for="q12_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>13. เล่นหรือทำกิจกรรมเงียบ ๆ ไม่เป็น</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q13" id="q13_0" value="0" required /><label for="q13_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q13" id="q13_1" value="1" /><label for="q13_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q13" id="q13_2" value="2" /><label for="q13_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q13" id="q13_3" value="3" /><label for="q13_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>14. พร้อมจะเคลื่อนไหวอยู่เสมอ เหมือน "ติดเครื่อง" อยู่ตลอดเวลา</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q14" id="q14_0" value="0" required /><label for="q14_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q14" id="q14_1" value="1" /><label for="q14_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q14" id="q14_2" value="2" /><label for="q14_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q14" id="q14_3" value="3" /><label for="q14_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>15. พูดมาก</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q15" id="q15_0" value="0" required /><label for="q15_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q15" id="q15_1" value="1" /><label for="q15_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q15" id="q15_2" value="2" /><label for="q15_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q15" id="q15_3" value="3" /><label for="q15_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>16. มักโพล่งคำตอบออกมาก่อนจะฟังคําถามจบ</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q16" id="q16_0" value="0" required /><label for="q16_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q16" id="q16_1" value="1" /><label for="q16_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q16" id="q16_2" value="2" /><label for="q16_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q16" id="q16_3" value="3" /><label for="q16_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>17. ไม่ชอบรอคิว</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q17" id="q17_0" value="0" required /><label for="q17_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q17" id="q17_1" value="1" /><label for="q17_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q17" id="q17_2" value="2" /><label for="q17_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q17" id="q17_3" value="3" /><label for="q17_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>18. ชอบสอดแทรกผู้อื่น (เช่น พูดแทรกขณะผู้ใหญ่กำลังสนทนากัน)</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q18" id="q18_0" value="0" required /><label for="q18_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q18" id="q18_1" value="1" /><label for="q18_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q18" id="q18_2" value="2" /><label for="q18_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q18" id="q18_3" value="3" /><label for="q18_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-      </div>    
-
-      <!-- ด้านดื้อต่อต้าน -->    
-      <div class="question-group">  
-        <h3><i class="fa-solid fa-face-angry" style="color:var(--oppositional-color);"></i> ด้านดื้อต่อต้าน (ข้อ 19-26)</h3>  
-        
-        <div class="question"><label>19. อารมณ์เสียง่าย</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q19" id="q19_0" value="0" required /><label for="q19_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q19" id="q19_1" value="1" /><label for="q19_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q19" id="q19_2" value="2" /><label for="q19_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q19" id="q19_3" value="3" /><label for="q19_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-  
-        <div class="question"><label>20. ชอบโต้เถียงกับผู้ใหญ่</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q20" id="q20_0" value="0" required /><label for="q20_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q20" id="q20_1" value="1" /><label for="q20_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q20" id="q20_2" value="2" /><label for="q20_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q20" id="q20_3" value="3" /><label for="q20_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>21. ไม่ยอมทำตามสิ่งที่ผู้ใหญ่สั่งหรือวางกฎเกณฑ์ไว้</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q21" id="q21_0" value="0" required /><label for="q21_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q21" id="q21_1" value="1" /><label for="q21_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q21" id="q21_2" value="2" /><label for="q21_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q21" id="q21_3" value="3" /><label for="q21_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>22. จงใจก่อกวนผู้อื่น</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q22" id="q22_0" value="0" required /><label for="q22_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q22" id="q22_1" value="1" /><label for="q22_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q22" id="q22_2" value="2" /><label for="q22_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q22" id="q22_3" value="3" /><label for="q22_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>23. มักตำหนิผู้อื่นในสิ่งที่ตนเองทำผิด</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q23" id="q23_0" value="0" required /><label for="q23_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q23" id="q23_1" value="1" /><label for="q23_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q23" id="q23_2" value="2" /><label for="q23_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q23" id="q23_3" value="3" /><label for="q23_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>24. ขี้รำคาญ</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q24" id="q24_0" value="0" required /><label for="q24_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q24" id="q24_1" value="1" /><label for="q24_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q24" id="q24_2" value="2" /><label for="q24_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q24" id="q24_3" value="3" /><label for="q24_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>25. โกรธขึ้งบึ้งตึงเป็นประจำ</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q25" id="q25_0" value="0" required /><label for="q25_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q25" id="q25_1" value="1" /><label for="q25_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q25" id="q25_2" value="2" /><label for="q25_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q25" id="q25_3" value="3" /><label for="q25_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-
-        <div class="question"><label>26. เจ้าคิดเจ้าแค้น</label>  
-          <div class="options-inline">  
-            <input type="radio" name="q26" id="q26_0" value="0" required /><label for="q26_0"><i class="fa-regular fa-face-smile"></i>ไม่เลย <span>(0)</span></label>  
-            <input type="radio" name="q26" id="q26_1" value="1" /><label for="q26_1"><i class="fa-regular fa-face-meh"></i>เล็กน้อย <span>(1)</span></label>  
-            <input type="radio" name="q26" id="q26_2" value="2" /><label for="q26_2"><i class="fa-regular fa-face-frown"></i>ค่อนข้างมาก <span>(2)</span></label>  
-            <input type="radio" name="q26" id="q26_3" value="3" /><label for="q26_3"><i class="fa-solid fa-face-grimace"></i>มาก <span>(3)</span></label>  
-          </div>  
-        </div>  
-      </div>    
-
-      <div class="form-buttons">  
-        <button type="button" onclick="calculateAndDisplay()" id="calculateButton"><i class="fa-solid fa-calculator"></i> คำนวณผลคะแนนและแปลผล</button>  
-        <button type="button" onclick="printReport()" id="printButton"><i class="fa-solid fa-print"></i> พิมพ์รายงาน</button>  
-        <button type="button" onclick="resetForm()" id="resetButton"><i class="fa-solid fa-trash-can"></i> รีเซตข้อมูล</button>  
-      </div>  
-    </form>  
-
-    <div id="printResult">  
-      <div class="result-header">  
-        <i class="fa-solid fa-square-poll-vertical" style="font-size: 26px;"></i>  
-        <h2>สรุปผลการประเมินพฤติกรรม ADHD Smart Screen (SNAP-IV)</h2>  
-      </div>    
-      <div class="patient-info-summary">  
-        <div><strong>ชื่อผู้รับบริการ:</strong> <span id="displayName"></span></div>  
-        <div><strong>วันที่ประเมิน:</strong> <span id="displayDate"></span></div>  
-        <div><strong>ระดับการศึกษา:</strong> <span id="displayEducation"></span></div>  
-        <div><strong>ประเมินโดย:</strong> <span id="displayAssessor"></span></div>  
-      </div>    
-      <div id="displaySummary"></div>    
-      <div id="descriptionPrint" style="margin-top: 25px; padding: 15px 20px; background-color: #f1f5f9; border-radius: 12px; font-size: 14px; border: 1px solid #e2e8f0;">  
-        <h4 style="color:var(--primary-dark); margin: 0 0 8px 0; font-size: 15px;"><i class="fa-solid fa-circle-exclamation"></i> เกณฑ์การแปลผลที่ใช้อ้างอิง (Cutoff Score)</h4>  
-        <p style="margin: 3px 0;"><strong>สำหรับผู้ปกครอง:</strong> ขาดสมาธิ ≥ 16 คะแนน, ซน/หุนหันพลันแล่น ≥ 14 คะแนน, ดื้อต่อต้าน ≥ 12 คะแนน</p>  
-        <p style="margin: 3px 0;"><strong>สำหรับครู:</strong> ขาดสมาธิ ≥ 18 คะแนน, ซน/หุนหันพลันแล่น ≥ 11 คะแนน, ดื้อต่อต้าน ≥ 8 คะแนน</p>  
-      </div>    
-      <div id="printTable"></div>  
-    </div>  
-  </div>   
-
-  <script>  
-  function formatDate(dateString) {  
-      if (!dateString) return '';  
-      const parts = dateString.split('-');   
-      const year = parts[0];   
-      const month = parts[1];  
-      const day = parts[2];  
-      return `${day}/${month}/${year}`;  
-  }  
-    
-  function calculateAndDisplay() {  
-    const form = document.forms['snapForm'];  
-    const assessor = document.querySelector('input[name="assessor"]:checked');  
-    const educationLevel = document.getElementById('educationLevel');  
-      
-    if (!assessor || !educationLevel.value || !form.name.value || !form.date.value) {  
-      alert('กรุณากรอกข้อมูลพื้นฐานและเลือกผู้ประเมินให้ครบถ้วน');  
-      return false;   
-    }  
-    const assessorType = assessor.value;  
-    
-    let inattention = 0, hyperactivity = 0, oppositional = 0;  
-      
-    const allQuestions = document.querySelectorAll('.question');  
-    allQuestions.forEach(q => {  
-      q.style.borderBottom = '1px solid #edf2f7';  
-      q.style.backgroundColor = 'transparent';  
-    });  
-    
-    let firstUnansweredQuestionIndex = -1;  
-    
-    for(let i = 1; i <= 26; i++) {  
-      const qName = 'q' + i;  
-      const q = form[qName];  
-      let val = null;  
-      let isChecked = false;  
-    
-      if (q) {  
-        for (const ele of q) {  
-          if (ele.checked) {  
-            val = parseInt(ele.value);  
-            isChecked = true;  
-            break;  
-          }  
-        }  
-      }  
-        
-      if (!isChecked && firstUnansweredQuestionIndex === -1) {  
-        firstUnansweredQuestionIndex = i;  
-      }  
-        
-      if (isChecked) {  
-        if (i <= 9) inattention += val;  
-        else if (i <= 18) hyperactivity += val;  
-        else oppositional += val;  
-      }  
-    }  
-    
-    if (firstUnansweredQuestionIndex !== -1) {  
-      alert('กรุณาตอบคำถามข้อที่ ' + firstUnansweredQuestionIndex + ' ให้ครบถ้วน');  
-      const firstUnansweredQuestion = document.querySelector(`input[name="q${firstUnansweredQuestionIndex}"]`).closest('.question');  
-      if (firstUnansweredQuestion) {  
-          firstUnansweredQuestion.style.backgroundColor = '#fef2f2';  
-          firstUnansweredQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });  
-      }  
-      return false;   
-    }  
-    
-    const cutoffs = {  
-      "ผู้ปกครอง": {inattention: 16, hyperactivity: 14, oppositional: 12},  
-      "ครู": {inattention: 18, hyperactivity: 11, oppositional: 8}  
-    };  
-    
-    const cutoff = cutoffs[assessorType];  
-      
-    const inattentionStatus = inattention >= cutoff.inattention;  
-    const hyperactivityStatus = hyperactivity >= cutoff.hyperactivity;  
-    const oppositionalStatus = oppositional >= cutoff.oppositional;  
-      
-    let summaryHTML = `  
-      <p>  
-          <span><i class="fa-solid fa-head-side-virus" style="color:var(--inattention-color); margin-right:8px;"></i> <strong>ด้านขาดสมาธิ (1-9):</strong> คะแนนรวม ${inattention} คะแนน (เกณฑ์สำหรับ${assessorType} ≥ ${cutoff.inattention})</span>  
-          ${inattentionStatus ? `<span class="status-badge risk-badge"><i class="fa-solid fa-triangle-exclamation"></i> เสี่ยง</span>` : `<span class="status-badge normal-badge"><i class="fa-solid fa-circle-check"></i> ปกติ</span>`}  
-      </p>  
-      <p>  
-          <span><i class="fa-solid fa-child-holding-hands" style="color:var(--hyperactivity-color); margin-right:8px;"></i> <strong>ด้านซน/หุนหันพลันแล่น (10-18):</strong> คะแนนรวม ${hyperactivity} คะแนน (เกณฑ์สำหรับ${assessorType} ≥ ${cutoff.hyperactivity})</span>  
-          ${hyperactivityStatus ? `<span class="status-badge risk-badge"><i class="fa-solid fa-triangle-exclamation"></i> เสี่ยง</span>` : `<span class="status-badge normal-badge"><i class="fa-solid fa-circle-check"></i> ปกติ</span>`}  
-      </p>  
-      <p>  
-          <span><i class="fa-solid fa-face-angry" style="color:var(--oppositional-color); margin-right:8px;"></i> <strong>ด้านดื้อต่อต้าน (19-26):</strong> คะแนนรวม ${oppositional} คะแนน (เกณฑ์สำหรับ${assessorType} ≥ ${cutoff.oppositional})</span>  
-          ${oppositionalStatus ? `<span class="status-badge risk-badge"><i class="fa-solid fa-triangle-exclamation"></i> เสี่ยง</span>` : `<span class="status-badge normal-badge"><i class="fa-solid fa-circle-check"></i> ปกติ</span>`}  
-      </p>  
-    `;  
-    
-    let tableHTML = `<table class="result-table">  
-      <thead>  
-        <tr>  
-          <th>ด้านที่ประเมิน</th>  
-          <th style="text-align: center;">คะแนนที่ได้ (เต็ม)</th>  
-          <th style="text-align: center;">เกณฑ์ตัดสินจุดตัด (Cut-off)</th>  
-          <th style="text-align: center;">ผลการแปลความหมาย</th>  
-        </tr>  
-      </thead>  
-      <tbody>  
-        <tr class="${inattentionStatus ? 'invalid-result' : 'valid-result'}">  
-          <td>ด้านขาดสมาธิ (Inattention) (ข้อ 1-9)</td>  
-          <td style="text-align: center; font-weight: 500;">${inattention} (27)</td>  
-          <td style="text-align: center;">≥ ${cutoff.inattention}</td>  
-          <td style="text-align: center;">${inattentionStatus ? 'เสี่ยง' : 'ปกติ'}</td>  
-        </tr>  
-        <tr class="${hyperactivityStatus ? 'invalid-result' : 'valid-result'}">  
-          <td>ด้านซน อยู่ไม่นิ่ง/หุนหันพลันแล่น (Hyperactivity) (ข้อ 10-18)</td>  
-          <td style="text-align: center; font-weight: 500;">${hyperactivity} (27)</td>  
-          <td style="text-align: center;">≥ ${cutoff.hyperactivity}</td>  
-          <td style="text-align: center;">${hyperactivityStatus ? 'เสี่ยง' : 'ปกติ'}</td>  
-        </tr>  
-        <tr class="${oppositionalStatus ? 'invalid-result' : 'valid-result'}">  
-          <td>ด้านดื้อต่อต้าน (Oppositional Defiant Disorder) (ข้อ 19-26)</td>  
-          <td style="text-align: center; font-weight: 500;">${oppositional} (24)</td>  
-          <td style="text-align: center;">≥ ${cutoff.oppositional}</td>  
-          <td style="text-align: center;">${oppositionalStatus ? 'เสี่ยง' : 'ปกติ'}</td>  
-        </tr>  
-      </tbody>  
-    </table>`;  
-    
-    const formattedDate = formatDate(form.date.value);  
-      
-    document.getElementById('displaySummary').innerHTML = summaryHTML;  
-    document.getElementById('printTable').innerHTML = tableHTML;  
-      
-    document.getElementById('displayName').textContent = form.name.value;  
-    document.getElementById('displayDate').textContent = formattedDate;   
-    document.getElementById('displayEducation').textContent = educationLevel.value;  
-    document.getElementById('displayAssessor').textContent = assessorType;  
-      
-    document.getElementById('printResult').style.display = 'block';  
-    document.getElementById('printResult').scrollIntoView({ behavior: 'smooth' });  
-      
-    return true;   
-  }  
-    
-  function printReport() {  
-      const calculationSuccessful = calculateAndDisplay();  
-      if (!calculationSuccessful) return;   
-    
-      const reportContent = document.getElementById('printResult').innerHTML;  
-      const name = document.getElementById('displayName').textContent;  
-    
-      const htmlContent = `  
-          <html>  
-          <head>  
-              <title>รายงานผล ADHD Smart Screen (${name})</title>  
-              <meta charset="UTF-8" />  
-              <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">  
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-              <style>  
-                  body { font-family: 'Sarabun', sans-serif; padding: 20px; color: #333; margin: 1cm; font-size: 16px; }  
-                  h1 { color: #1565c0; text-align: center; margin-bottom: 5px; font-size: 24px;}  
-                  h2 { color: #1565c0; text-align: center; margin-top: 5px; border-bottom: 2px solid #1565c0; padding-bottom: 10px; font-size: 20px;}  
-                  h4 { color: #1565c0; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 3px;}  
-                  p { margin: 8px 0; font-size: 15px; }  
-                  .patient-info-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e2e8f0;}  
-                  .result-table { width: 100%; border-collapse: collapse; margin-top: 15px; }  
-                  .result-table th, .result-table td { border: 1px solid #333; padding: 10px; font-size: 15px; }  
-                  .result-table th { background-color: #e3f2fd; color: #000; text-align: center; font-weight: bold; }  
-                  .risk { color: #d32f2f !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }   
-                  .normal { color: #388e3c !important; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }   
-                  .valid-result td:last-child { color: #388e3c !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }   
-                  .invalid-result td:last-child { color: #d32f2f !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }  
-                  #displaySummary { display: none; }   
-                  #printResult { display: block; border: none; padding: 0;}  
-                  #printTable { display: block; }   
-              </style>  
-          </head>  
-      <body>  
-          <h1>ADHD Smart Screen (SNAP-IV)</h1>  
-          <p style="text-align: center; margin-bottom: 25px; color:#555;">โรงพยาบาลดอนจาน - รายงานสรุปผลการคัดกรอง</p>  
-          ${reportContent}  
-      </body>  
-      </html>  
-  `;  
-
-  const printWindow = window.open('', '', 'height=700,width=900');  
-  printWindow.document.write(htmlContent);  
-  printWindow.document.close();  
-  printWindow.focus();  
-  printWindow.print();
+  body {
+    padding: 10px 8px;
   }
 
-  function resetForm() {
-    if (!confirm("คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตข้อมูลทั้งหมด?")) {
-      return;
+  .container {
+    padding: 22px 14px;
+    border-radius: 18px;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  .brand-icon {
+    width: 82px;
+    height: 82px;
+    font-size: 36px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .options-inline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons button {
+    width: 100% !important;
+  }
+
+  .patient-info-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  #displaySummary p {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .instruction-banner {
+    padding: 15px;
+  }
+
+  .instruction-legend {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  #printResult {
+    padding: 18px;
+  }
+
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+
+  body {
+    background-color: white;
+    padding: 0;
+    margin: 0;
+  }
+
+  .container {
+    max-width: none;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  #snapForm,
+  #calculateButton,
+  #resetButton,
+  #printButton,
+  .install-app-box {
+    display: none !important;
+  }
+
+  #printResult {
+    border: none;
+    padding: 0;
+    display: block !important;
+    box-shadow: none;
+  }
+
+  #displaySummary {
+    display: none;
+  }
+
+  #printTable {
+    display: block;
+  }
+
+  .result-table {
+    border: 2px solid #333;
+    box-shadow: none;
+  }
+
+  .result-table th,
+  .result-table td {
+    border: 1px solid #333;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    color: #000 !important;
+  }
+
+  .risk,
+  .invalid-result td:last-child {
+    color: #d32f2f !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .normal,
+  .valid-result td:last-child {
+    color: #388e3c !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainContainer">
+
+  <!-- =========================
+       INSTALL APP
+  ========================== -->
+
+  <div class="install-app-box" id="installBox">
+
+    <h3>
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      ติดตั้ง ADHD Smart Screen
+    </h3>
+
+    <p>
+      ติดตั้งแอปไว้บนหน้าจอมือถือ
+      เพื่อเปิดใช้งานได้สะดวกยิ่งขึ้น
+    </p>
+
+    <button
+      type="button"
+      class="install-button"
+      id="installButton">
+
+      <i class="fa-solid fa-download"></i>
+      ติดตั้งแอป
+
+    </button>
+
+  </div>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <div class="header-brand">
+
+    <div class="brand-icon">
+
+      <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+    </div>
+
+    <h1>ADHD Smart Screen</h1>
+
+    <p class="subtitle">
+      แบบประเมินสมาธิสั้น (SNAP-IV)
+      - โรงพยาบาลดอนจาน
+    </p>
+
+  </div>
+
+  <!-- =========================
+       FORM
+  ========================== -->
+
+  <form id="snapForm">
+
+    <h2>
+      <i class="fa-solid fa-id-card-clip"></i>
+      ข้อมูลพื้นฐานของผู้รับบริการ
+    </h2>
+
+    <div class="info-grid">
+
+      <div class="info-group">
+
+        <label for="name">
+          ชื่อผู้รับบริการ:
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          placeholder="ระบุชื่อ-นามสกุล"
+          required>
+
+      </div>
+
+      <div class="info-group">
+
+        <label for="date">
+          วันที่ประเมิน:
+        </label>
+
+        <input
+          type="date"
+          id="date"
+          required>
+
+      </div>
+
+      <div class="info-group">
+
+        <label for="educationLevel">
+          ระดับการศึกษา:
+        </label>
+
+        <select
+          id="educationLevel"
+          required>
+
+          <option value="" disabled selected>
+            --- เลือกระดับการศึกษา ---
+          </option>
+
+          <option value="ป.1">
+            ประถมศึกษาปีที่ 1
+          </option>
+
+          <option value="ป.2">
+            ประถมศึกษาปีที่ 2
+          </option>
+
+          <option value="ป.3">
+            ประถมศึกษาปีที่ 3
+          </option>
+
+          <option value="ป.4">
+            ประถมศึกษาปีที่ 4
+          </option>
+
+          <option value="ป.5">
+            ประถมศึกษาปีที่ 5
+          </option>
+
+          <option value="ป.6">
+            ประถมศึกษาปีที่ 6
+          </option>
+
+          <option value="มัธยมต้น">
+            มัธยมศึกษาตอนต้น
+          </option>
+
+          <option value="มัธยมปลาย">
+            มัธยมศึกษาตอนปลาย
+          </option>
+
+          <option value="อื่นๆ">
+            อื่นๆ
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="info-group">
+
+        <label>
+          ประเมินโดย:
+        </label>
+
+        <div class="assessor-options">
+
+          <div class="assessor-box">
+
+            <input
+              type="radio"
+              name="assessor"
+              value="ผู้ปกครอง"
+              id="as_parent"
+              required>
+
+            <label for="as_parent">
+
+              <i class="fa-solid fa-user-tie"></i>
+              ผู้ปกครอง
+
+            </label>
+
+          </div>
+
+          <div class="assessor-box">
+
+            <input
+              type="radio"
+              name="assessor"
+              value="ครู"
+              id="as_teacher">
+
+            <label for="as_teacher">
+
+              <i class="fa-solid fa-chalkboard-user"></i>
+              ครู
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =========================
+         INSTRUCTION
+    ========================== -->
+
+    <div class="instruction-banner">
+
+      <i class="fa-solid fa-circle-info banner-icon"></i>
+
+      <div>
+
+        <strong>
+          คำแนะนำสำหรับผู้ประเมิน:
+        </strong>
+
+        โปรดเลือกระดับความรุนแรงของอาการ
+        ในแต่ละข้อตามที่ท่านสังเกตเห็นพฤติกรรมจริง
+
+        <div class="instruction-legend">
+
+          <span>
+            <i class="fa-regular fa-face-smile"
+               style="color:var(--lvl-0)">
+            </i>
+            ไม่เลย (0)
+          </span>
+
+          <span>
+            <i class="fa-regular fa-face-meh"
+               style="color:var(--lvl-1)">
+            </i>
+            เล็กน้อย (1)
+          </span>
+
+          <span>
+            <i class="fa-regular fa-face-frown"
+               style="color:var(--lvl-2)">
+            </i>
+            ค่อนข้างมาก (2)
+          </span>
+
+          <span>
+            <i class="fa-solid fa-face-grimace"
+               style="color:var(--lvl-3)">
+            </i>
+            มาก (3)
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         QUESTIONS
+    ====================================================== -->
+
+    <!-- 1-9 -->
+
+    <div class="question-group">
+
+      <h3>
+        <i class="fa-solid fa-head-side-virus"
+           style="color:var(--inattention-color)">
+        </i>
+
+        ด้านขาดสมาธิ (ข้อ 1-9)
+      </h3>
+
+      <script>
+      const questionTexts = [
+
+        "มักไม่ละเอียดรอบคอบหรือสะเพร่าในการทำงานต่าง ๆ เช่น การบ้าน",
+
+        "ทำอะไรนาน ๆ ไม่ได้",
+
+        "ดูเหมือนไม่ค่อยฟังเวลามีคนพูดด้วย",
+
+        "ทำตามคำสั่งไม่ค่อยครบ เช่น ไม่ค่อยทำการบ้านให้เสร็จ",
+
+        "จัดระเบียบงานและกิจกรรมต่าง ๆ ไม่เป็น",
+
+        "มักหลีกเลี่ยงกิจกรรมที่ต้องใช้ความอดทนในการทำให้สำเร็จ",
+
+        "ทำของหายบ่อย ๆ เช่น ของเล่น สมุดจดงาน เครื่องเขียน",
+
+        "วอกแวกง่าย",
+
+        "ขี้ลืม",
+
+        "มือเท้ายุกยิก นั่งบิดไปบิดมา",
+
+        "นั่งไม่ติดที่ ชอบลุกจากที่นั่งในชั้นเรียนหรือจากที่ที่ควรจะนั่งเรียบร้อย",
+
+        "วิ่งหรือปีนป่ายมากเกินควรอย่างไม่รู้กาลเทศะ",
+
+        "เล่นหรือทำกิจกรรมเงียบ ๆ ไม่เป็น",
+
+        "พร้อมจะเคลื่อนไหวอยู่เสมอ เหมือน \"ติดเครื่อง\" อยู่ตลอดเวลา",
+
+        "พูดมาก",
+
+        "มักโพล่งคำตอบออกมาก่อนจะฟังคําถามจบ",
+
+        "ไม่ชอบรอคิว",
+
+        "ชอบสอดแทรกผู้อื่น (เช่น พูดแทรกขณะผู้ใหญ่กำลังสนทนากัน)",
+
+        "อารมณ์เสียง่าย",
+
+        "ชอบโต้เถียงกับผู้ใหญ่",
+
+        "ไม่ยอมทำตามสิ่งที่ผู้ใหญ่สั่งหรือวางกฎเกณฑ์ไว้",
+
+        "จงใจก่อกวนผู้อื่น",
+
+        "มักตำหนิผู้อื่นในสิ่งที่ตนเองทำผิด",
+
+        "ขี้รำคาญ",
+
+        "โกรธขึ้งบึ้งตึงเป็นประจำ",
+
+        "เจ้าคิดเจ้าแค้น"
+
+      ];
+      </script>
+
+      <div id="questionContainer"></div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="form-buttons">
+
+      <button
+        type="button"
+        onclick="calculateAndDisplay()"
+        id="calculateButton">
+
+        <i class="fa-solid fa-calculator"></i>
+
+        คำนวณผลคะแนนและแปลผล
+
+      </button>
+
+      <button
+        type="button"
+        onclick="printReport()"
+        id="printButton">
+
+        <i class="fa-solid fa-print"></i>
+
+        พิมพ์รายงาน
+
+      </button>
+
+      <button
+        type="button"
+        onclick="resetForm()"
+        id="resetButton">
+
+        <i class="fa-solid fa-trash-can"></i>
+
+        รีเซตข้อมูล
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <!-- =========================
+       RESULT
+  ========================== -->
+
+  <div id="printResult">
+
+    <div class="result-header">
+
+      <i
+        class="fa-solid fa-square-poll-vertical"
+        style="font-size:26px">
+      </i>
+
+      <h2>
+        สรุปผลการประเมินพฤติกรรม
+        ADHD Smart Screen (SNAP-IV)
+      </h2>
+
+    </div>
+
+    <div class="patient-info-summary">
+
+      <div>
+        <strong>ชื่อผู้รับบริการ:</strong>
+        <span id="displayName"></span>
+      </div>
+
+      <div>
+        <strong>วันที่ประเมิน:</strong>
+        <span id="displayDate"></span>
+      </div>
+
+      <div>
+        <strong>ระดับการศึกษา:</strong>
+        <span id="displayEducation"></span>
+      </div>
+
+      <div>
+        <strong>ประเมินโดย:</strong>
+        <span id="displayAssessor"></span>
+      </div>
+
+    </div>
+
+    <div id="displaySummary"></div>
+
+    <div
+      id="descriptionPrint"
+      style="
+        margin-top:25px;
+        padding:15px 20px;
+        background:#f1f5f9;
+        border-radius:12px;
+        font-size:14px;
+        border:1px solid #e2e8f0;
+      ">
+
+      <h4
+        style="
+          color:var(--primary-dark);
+          margin:0 0 8px;
+          font-size:15px;
+        ">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        เกณฑ์การแปลผลที่ใช้อ้างอิง
+        (Cutoff Score)
+
+      </h4>
+
+      <p style="margin:3px 0">
+
+        <strong>สำหรับผู้ปกครอง:</strong>
+
+        ขาดสมาธิ ≥ 16 คะแนน,
+        ซน/หุนหันพลันแล่น ≥ 14 คะแนน,
+        ดื้อต่อต้าน ≥ 12 คะแนน
+
+      </p>
+
+      <p style="margin:3px 0">
+
+        <strong>สำหรับครู:</strong>
+
+        ขาดสมาธิ ≥ 18 คะแนน,
+        ซน/หุนหันพลันแล่น ≥ 11 คะแนน,
+        ดื้อต่อต้าน ≥ 8 คะแนน
+
+      </p>
+
+    </div>
+
+    <div id="printTable"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   สร้างคำถาม 26 ข้อ
+========================================================= */
+
+const questionContainer =
+  document.getElementById("questionContainer");
+
+const sections = [
+  {
+    start: 1,
+    end: 9,
+    title: "ด้านขาดสมาธิ (ข้อ 1-9)",
+    icon: "fa-head-side-virus",
+    color: "var(--inattention-color)"
+  },
+  {
+    start: 10,
+    end: 18,
+    title: "ด้านซน อยู่ไม่นิ่ง/หุนหันพลันแล่น (ข้อ 10-18)",
+    icon: "fa-child",
+    color: "var(--hyperactivity-color)"
+  },
+  {
+    start: 19,
+    end: 26,
+    title: "ด้านดื้อต่อต้าน (ข้อ 19-26)",
+    icon: "fa-face-angry",
+    color: "var(--oppositional-color)"
+  }
+];
+
+let generatedHTML = "";
+
+for(let i = 1; i <= 26; i++){
+
+  const section =
+    sections.find(
+      s => i >= s.start && i <= s.end
+    );
+
+  if(i === section.start){
+
+    generatedHTML += `
+      ${i === 1 ? "" : "</div>"}
+
+      ${i !== 1 ? `
+      <div class="question-group">
+      ` : ""}
+
+      ${i !== 1 ? `
+      <h3>
+        <i class="fa-solid ${section.icon}"
+           style="color:${section.color}">
+        </i>
+        ${section.title}
+      </h3>
+      ` : ""}
+    `;
+
+  }
+
+  generatedHTML += `
+
+    <div
+      class="question"
+      data-question="${i}">
+
+      <label>
+        ${i}. ${questionTexts[i - 1]}
+      </label>
+
+      <div class="options-inline">
+
+        <input
+          type="radio"
+          name="q${i}"
+          id="q${i}_0"
+          value="0"
+          required>
+
+        <label for="q${i}_0">
+          <i class="fa-regular fa-face-smile"></i>
+          ไม่เลย
+          <span>(0)</span>
+        </label>
+
+        <input
+          type="radio"
+          name="q${i}"
+          id="q${i}_1"
+          value="1">
+
+        <label for="q${i}_1">
+          <i class="fa-regular fa-face-meh"></i>
+          เล็กน้อย
+          <span>(1)</span>
+        </label>
+
+        <input
+          type="radio"
+          name="q${i}"
+          id="q${i}_2"
+          value="2">
+
+        <label for="q${i}_2">
+          <i class="fa-regular fa-face-frown"></i>
+          ค่อนข้างมาก
+          <span>(2)</span>
+        </label>
+
+        <input
+          type="radio"
+          name="q${i}"
+          id="q${i}_3"
+          value="3">
+
+        <label for="q${i}_3">
+          <i class="fa-solid fa-face-grimace"></i>
+          มาก
+          <span>(3)</span>
+        </label>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+questionContainer.innerHTML =
+  generatedHTML;
+
+
+/* =========================================================
+   วันที่ปัจจุบัน
+========================================================= */
+
+const dateInput =
+  document.getElementById("date");
+
+const today =
+  new Date();
+
+dateInput.value =
+  today.toISOString().split("T")[0];
+
+
+/* =========================================================
+   LocalStorage Auto Save
+========================================================= */
+
+const form =
+  document.getElementById("snapForm");
+
+function saveDraft(){
+
+  const data = {
+
+    name:
+      document.getElementById("name").value,
+
+    date:
+      document.getElementById("date").value,
+
+    education:
+      document.getElementById("educationLevel").value,
+
+    assessor:
+      document.querySelector(
+        'input[name="assessor"]:checked'
+      )?.value || "",
+
+    answers: {}
+
+  };
+
+  for(let i=1;i<=26;i++){
+
+    const selected =
+      document.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(selected){
+
+      data.answers[i] =
+        selected.value;
+
     }
 
-    document.getElementById('snapForm').reset();
-    document.getElementById('printResult').style.display = 'none';
-    document.getElementById('displaySummary').innerHTML = '';
-    document.getElementById('printTable').innerHTML = '';
-
-    const questions = document.querySelectorAll('.question');
-    questions.forEach(q => {
-      q.style.borderBottom = '1px solid #edf2f7';
-      q.style.backgroundColor = 'transparent';
-    });
-
-    document.getElementById('mainContainer').scrollIntoView({ behavior: 'smooth' });
   }
-  </script>
-</body>  
-</html>
 
+  localStorage.setItem(
+    "adhdSmartScreenDraft",
+    JSON.stringify(data)
+  );
+
+}
+
+function loadDraft(){
+
+  const saved =
+    localStorage.getItem(
+      "adhdSmartScreenDraft"
+    );
+
+  if(!saved) return;
+
+  try{
+
+    const data =
+      JSON.parse(saved);
+
+    if(data.name)
+      document.getElementById("name").value =
+        data.name;
+
+    if(data.date)
+      document.getElementById("date").value =
+        data.date;
+
+    if(data.education)
+      document.getElementById("educationLevel").value =
+        data.education;
+
+    if(data.assessor){
+
+      const radio =
+        document.querySelector(
+          `input[name="assessor"][value="${data.assessor}"]`
+        );
+
+      if(radio)
+        radio.checked = true;
+
+    }
+
+    if(data.answers){
+
+      Object.keys(data.answers)
+        .forEach(q=>{
+
+          const radio =
+            document.querySelector(
+              `input[name="q${q}"][value="${data.answers[q]}"]`
+            );
+
+          if(radio)
+            radio.checked = true;
+
+        });
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "ไม่สามารถโหลดข้อมูลเดิมได้",
+      error
+    );
+
+  }
+
+}
+
+form.addEventListener(
+  "input",
+  saveDraft
+);
+
+form.addEventListener(
+  "change",
+  saveDraft
+);
+
+loadDraft();
+
+
+/* =========================================================
+   Calculate
+========================================================= */
+
+function formatDate(dateString){
+
+  if(!dateString)
+    return "";
+
+  const parts =
+    dateString.split("-");
+
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+}
+
+
+function calculateAndDisplay(){
+
+  const assessor =
+    document.querySelector(
+      'input[name="assessor"]:checked'
+    );
+
+  const educationLevel =
+    document.getElementById(
+      "educationLevel"
+    );
+
+  const name =
+    document.getElementById(
+      "name"
+    ).value.trim();
+
+  const date =
+    document.getElementById(
+      "date"
+    ).value;
+
+  if(
+    !assessor ||
+    !educationLevel.value ||
+    !name ||
+    !date
+  ){
+
+    alert(
+      "กรุณากรอกข้อมูลพื้นฐานและเลือกผู้ประเมินให้ครบถ้วน"
+    );
+
+    return false;
+
+  }
+
+  let inattention = 0;
+  let hyperactivity = 0;
+  let oppositional = 0;
+
+  let firstUnanswered = -1;
+
+  for(let i=1;i<=26;i++){
+
+    const selected =
+      document.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    const question =
+      document.querySelector(
+        `.question[data-question="${i}"]`
+      );
+
+    if(!selected){
+
+      if(firstUnanswered === -1){
+
+        firstUnanswered = i;
+
+        if(question){
+
+          question.style.backgroundColor =
+            "#fef2f2";
+
+          question.style.borderRadius =
+            "12px";
+
+          question.style.padding =
+            "22px 12px";
+
+        }
+
+      }
+
+      continue;
+
+    }
+
+    if(question){
+
+      question.style.backgroundColor =
+        "transparent";
+
+    }
+
+    const value =
+      parseInt(
+        selected.value,
+        10
+      );
+
+    if(i <= 9){
+
+      inattention += value;
+
+    }else if(i <= 18){
+
+      hyperactivity += value;
+
+    }else{
+
+      oppositional += value;
+
+    }
+
+  }
+
+  if(firstUnanswered !== -1){
+
+    alert(
+      "กรุณาตอบคำถามข้อที่ " +
+      firstUnanswered +
+      " ให้ครบถ้วน"
+    );
+
+    const target =
+      document.querySelector(
+        `.question[data-question="${firstUnanswered}"]`
+      );
+
+    if(target){
+
+      target.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    }
+
+    return false;
+
+  }
+
+  /* ==========================================
+     เกณฑ์ Cutoff
+  ========================================== */
+
+  const cutoffs = {
+
+    "ผู้ปกครอง": {
+
+      inattention: 16,
+      hyperactivity: 14,
+      oppositional: 12
+
+    },
+
+    "ครู": {
+
+      inattention: 18,
+      hyperactivity: 11,
+      oppositional: 8
+
+    }
+
+  };
+
+  const cutoff =
+    cutoffs[assessor.value];
+
+  const inattentionStatus =
+    inattention >= cutoff.inattention;
+
+  const hyperactivityStatus =
+    hyperactivity >= cutoff.hyperactivity;
+
+  const oppositionalStatus =
+    oppositional >= cutoff.oppositional;
+
+  const overallRisk =
+    inattentionStatus ||
+    hyperactivityStatus ||
+    oppositionalStatus;
+
+  /* ==========================================
+     Summary
+  ========================================== */
+
+  const statusHTML =
+    status => {
+
+      return status
+
+        ? `
+          <span class="status-badge risk-badge">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            เสี่ยง
+          </span>
+        `
+
+        : `
+          <span class="status-badge normal-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            ปกติ
+          </span>
+        `;
+
+    };
+
+  const summaryHTML = `
+
+    <p>
+
+      <span>
+
+        <i
+          class="fa-solid fa-head-side-virus"
+          style="
+            color:var(--inattention-color);
+            margin-right:8px;
+          ">
+        </i>
+
+        <strong>
+          ด้านขาดสมาธิ (1-9):
+        </strong>
+
+        คะแนนรวม ${inattention} คะแนน
+
+        (เกณฑ์สำหรับ${assessor.value}
+        ≥ ${cutoff.inattention})
+
+      </span>
+
+      ${statusHTML(inattentionStatus)}
+
+    </p>
+
+    <p>
+
+      <span>
+
+        <i
+          class="fa-solid fa-child"
+          style="
+            color:var(--hyperactivity-color);
+            margin-right:8px;
+          ">
+        </i>
+
+        <strong>
+          ด้านซน/หุนหันพลันแล่น (10-18):
+        </strong>
+
+        คะแนนรวม ${hyperactivity} คะแนน
+
+        (เกณฑ์สำหรับ${assessor.value}
+        ≥ ${cutoff.hyperactivity})
+
+      </span>
+
+      ${statusHTML(hyperactivityStatus)}
+
+    </p>
+
+    <p>
+
+      <span>
+
+        <i
+          class="fa-solid fa-face-angry"
+          style="
+            color:var(--oppositional-color);
+            margin-right:8px;
+          ">
+        </i>
+
+        <strong>
+          ด้านดื้อต่อต้าน (19-26):
+        </strong>
+
+        คะแนนรวม ${oppositional} คะแนน
+
+        (เกณฑ์สำหรับ${assessor.value}
+        ≥ ${cutoff.oppositional})
+
+      </span>
+
+      ${statusHTML(oppositionalStatus)}
+
+    </p>
+
+    <div
+      style="
+        margin-top:15px;
+        padding:18px;
+        text-align:center;
+        border-radius:14px;
+        background:
+          ${overallRisk
+            ? "#fee2e2"
+            : "#dcfce7"};
+        color:
+          ${overallRisk
+            ? "#c62828"
+            : "#2e7d32"};
+      ">
+
+      <strong style="font-size:20px">
+
+        ${
+          overallRisk
+            ? "⚠️ เข้าเกณฑ์คัดกรอง"
+            : "✅ ไม่เข้าเกณฑ์คัดกรอง"
+        }
+
+      </strong>
+
+      <br>
+
+      <span>
+
+        ${
+          overallRisk
+
+            ? "ควรได้รับการประเมินเพิ่มเติมโดยบุคลากรทางการแพทย์"
+
+            : "ไม่พบคะแนนเข้าเกณฑ์คัดกรองตามเกณฑ์ที่กำหนด"
+        }
+
+      </span>
+
+    </div>
+
+  `;
+
+  /* ==========================================
+     Print Table
+  ========================================== */
+
+  const tableHTML = `
+
+    <table class="result-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            ด้านที่ประเมิน
+          </th>
+
+          <th style="text-align:center">
+            คะแนนที่ได้ (เต็ม)
+          </th>
+
+          <th style="text-align:center">
+            Cut-off
+          </th>
+
+          <th style="text-align:center">
+            ผลการแปลความหมาย
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr class="${
+          inattentionStatus
+            ? "invalid-result"
+            : "valid-result"
+        }">
+
+          <td>
+            ด้านขาดสมาธิ
+            (Inattention)
+            (ข้อ 1-9)
+          </td>
+
+          <td style="text-align:center">
+            ${inattention} (27)
+          </td>
+
+          <td style="text-align:center">
+            ≥ ${cutoff.inattention}
+          </td>
+
+          <td style="text-align:center">
+            ${
+              inattentionStatus
+                ? "เสี่ยง"
+                : "ปกติ"
+            }
+          </td>
+
+        </tr>
+
+        <tr class="${
+          hyperactivityStatus
+            ? "invalid-result"
+            : "valid-result"
+        }">
+
+          <td>
+            ด้านซน อยู่ไม่นิ่ง/
+            หุนหันพลันแล่น
+            (Hyperactivity)
+            (ข้อ 10-18)
+          </td>
+
+          <td style="text-align:center">
+            ${hyperactivity} (27)
+          </td>
+
+          <td style="text-align:center">
+            ≥ ${cutoff.hyperactivity}
+          </td>
+
+          <td style="text-align:center">
+            ${
+              hyperactivityStatus
+                ? "เสี่ยง"
+                : "ปกติ"
+            }
+          </td>
+
+        </tr>
+
+        <tr class="${
+          oppositionalStatus
+            ? "invalid-result"
+            : "valid-result"
+        }">
+
+          <td>
+            ด้านดื้อต่อต้าน
+            (Oppositional)
+            (ข้อ 19-26)
+          </td>
+
+          <td style="text-align:center">
+            ${oppositional} (24)
+          </td>
+
+          <td style="text-align:center">
+            ≥ ${cutoff.oppositional}
+          </td>
+
+          <td style="text-align:center">
+            ${
+              oppositionalStatus
+                ? "เสี่ยง"
+                : "ปกติ"
+            }
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div
+      style="
+        margin-top:20px;
+        padding:15px;
+        border:1px solid #ddd;
+        border-radius:10px;
+        font-size:14px;
+      ">
+
+      <strong>
+        หมายเหตุ:
+      </strong>
+
+      ผลการประเมินนี้เป็นการคัดกรองเบื้องต้น
+      ไม่ใช่การวินิจฉัยโรค
+      หากพบว่าเข้าเกณฑ์คัดกรอง
+      ควรได้รับการประเมินเพิ่มเติม
+      โดยบุคลากรทางการแพทย์
+
+    </div>
+
+  `;
+
+  /* ==========================================
+     แสดงผล
+  ========================================== */
+
+  document.getElementById(
+    "displayName"
+  ).textContent = name;
+
+  document.getElementById(
+    "displayDate"
+  ).textContent =
+    formatDate(date);
+
+  document.getElementById(
+    "displayEducation"
+  ).textContent =
+    educationLevel.value;
+
+  document.getElementById(
+    "displayAssessor"
+  ).textContent =
+    assessor.value;
+
+  document.getElementById(
+    "displaySummary"
+  ).innerHTML =
+    summaryHTML;
+
+  document.getElementById(
+    "printTable"
+  ).innerHTML =
+    tableHTML;
+
+  document.getElementById(
+    "printResult"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "printResult"
+  ).scrollIntoView({
+    behavior:"smooth"
+  });
+
+  /* บันทึกผลล่าสุด */
+
+  localStorage.setItem(
+    "adhdSmartScreenLastResult",
+    JSON.stringify({
+
+      name,
+      date,
+      education:
+        educationLevel.value,
+
+      assessor:
+        assessor.value,
+
+      inattention,
+      hyperactivity,
+      oppositional,
+
+      overallRisk,
+
+      savedAt:
+        new Date().toISOString()
+
+    })
+  );
+
+  return true;
+
+}
+
+
+/* =========================================================
+   PRINT REPORT
+========================================================= */
+
+function printReport(){
+
+  const success =
+    calculateAndDisplay();
+
+  if(!success)
+    return;
+
+  const reportContent =
+    document.getElementById(
+      "printResult"
+    ).innerHTML;
+
+  const name =
+    document.getElementById(
+      "displayName"
+    ).textContent;
+
+  const printWindow =
+    window.open(
+      "",
+      "_blank",
+      "height=800,width=1000"
+    );
+
+  if(!printWindow){
+
+    alert(
+      "เบราว์เซอร์บล็อกหน้าต่างพิมพ์ กรุณาอนุญาต Pop-up"
+    );
+
+    return;
+
+  }
+
+  printWindow.document.write(`
+
+    <!DOCTYPE html>
+
+    <html lang="th">
+
+    <head>
+
+      <meta charset="UTF-8">
+
+      <title>
+        รายงานผล ADHD Smart Screen
+      </title>
+
+      <link
+        href="
+        https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap
+        "
+        rel="stylesheet">
+
+      <style>
+
+        * {
+          box-sizing:border-box;
+        }
+
+        body {
+
+          font-family:'Sarabun', sans-serif;
+
+          color:#333;
+
+          margin:1cm;
+
+          font-size:15px;
+
+        }
+
+        h1 {
+
+          color:#1565c0;
+
+          text-align:center;
+
+          font-size:24px;
+
+          margin-bottom:5px;
+
+        }
+
+        h2 {
+
+          color:#1565c0;
+
+          font-size:20px;
+
+        }
+
+        .patient-info-summary {
+
+          display:grid;
+
+          grid-template-columns:
+            repeat(2,1fr);
+
+          gap:10px;
+
+          background:#f8fafc;
+
+          padding:15px;
+
+          border-radius:8px;
+
+          margin-bottom:20px;
+
+          border:1px solid #ddd;
+
+        }
+
+        #displaySummary {
+
+          display:none;
+
+        }
+
+        #printTable {
+
+          display:block;
+
+        }
+
+        .result-table {
+
+          width:100%;
+
+          border-collapse:collapse;
+
+          margin-top:15px;
+
+        }
+
+        .result-table th,
+        .result-table td {
+
+          border:1px solid #333;
+
+          padding:9px;
+
+        }
+
+        .result-table th {
+
+          background:#e3f2fd;
+
+          text-align:center;
+
+          font-weight:bold;
+
+        }
+
+        .invalid-result td:last-child {
+
+          color:#d32f2f;
+
+          font-weight:bold;
+
+        }
+
+        .valid-result td:last-child {
+
+          color:#388e3c;
+
+          font-weight:bold;
+
+        }
+
+        @media print {
+
+          body {
+            margin:1cm;
+          }
+
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <h1>
+        ADHD Smart Screen (SNAP-IV)
+      </h1>
+
+      <p
+        style="
+          text-align:center;
+          color:#555;
+          margin-bottom:25px;
+        ">
+
+        โรงพยาบาลดอนจาน
+        จังหวัดกาฬสินธุ์
+
+      </p>
+
+      ${reportContent}
+
+    </body>
+
+    </html>
+
+  `);
+
+  printWindow.document.close();
+
+  setTimeout(()=>{
+
+    printWindow.focus();
+
+    printWindow.print();
+
+  },500);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetForm(){
+
+  if(
+    !confirm(
+      "คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตข้อมูลทั้งหมด?"
+    )
+  ){
+
+    return;
+
+  }
+
+  document.getElementById(
+    "snapForm"
+  ).reset();
+
+  dateInput.value =
+    today.toISOString()
+      .split("T")[0];
+
+  document.getElementById(
+    "printResult"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "displaySummary"
+  ).innerHTML =
+    "";
+
+  document.getElementById(
+    "printTable"
+  ).innerHTML =
+    "";
+
+  document.querySelectorAll(
+    ".question"
+  ).forEach(q=>{
+
+    q.style.backgroundColor =
+      "transparent";
+
+    q.style.borderRadius =
+      "";
+
+    q.style.padding =
+      "";
+
+  });
+
+  localStorage.removeItem(
+    "adhdSmartScreenDraft"
+  );
+
+  localStorage.removeItem(
+    "adhdSmartScreenLastResult"
+  );
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   PWA INSTALL
+========================================================= */
+
+let deferredPrompt = null;
+
+window.addEventListener(
+  "beforeinstallprompt",
+  event => {
+
+    event.preventDefault();
+
+    deferredPrompt = event;
+
+    document.getElementById(
+      "installBox"
+    ).classList.add("show");
+
+  }
+);
+
+document.getElementById(
+  "installButton"
+).addEventListener(
+  "click",
+  async () => {
+
+    if(!deferredPrompt){
+
+      alert(
+        "หากไม่พบหน้าต่างติดตั้ง ให้เปิดเมนูของเบราว์เซอร์ แล้วเลือก \"เพิ่มลงในหน้าจอหลัก\""
+      );
+
+      return;
+
+    }
+
+    deferredPrompt.prompt();
+
+    const result =
+      await deferredPrompt.userChoice;
+
+    console.log(
+      "PWA install:",
+      result.outcome
+    );
+
+    deferredPrompt = null;
+
+    document.getElementById(
+      "installBox"
+    ).classList.remove("show");
+
+  }
+);
+
+window.addEventListener(
+  "appinstalled",
+  () => {
+
+    document.getElementById(
+      "installBox"
+    ).classList.remove("show");
+
+    console.log(
+      "ADHD Smart Screen installed"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if(
+  "serviceWorker" in navigator
+){
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then(
+          registration => {
+
+            console.log(
+              "ADHD Smart Screen PWA ready",
+              registration.scope
+            );
+
+          }
+        )
+        .catch(
+          error => {
+
+            console.log(
+              "Service Worker registration failed:",
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+</script>
+
+</body>
+</html>
