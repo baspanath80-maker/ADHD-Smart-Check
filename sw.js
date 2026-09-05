@@ -1,112 +1,100 @@
-const CACHE_NAME = "adhd-smart-v1";
+const CACHE_NAME = "adhd-smart-screen-v2";
 
-const FILES = [
-    "./",
-    "./index.html",
-    "./manifest.json",
-    "./18.png",
-    "./19.png",
-    "./5.png"
+const APP_FILES = [
+  "./",
+  "./index.html",
+  "./manifest.json"
 ];
-
-/* =====================================================
-   INSTALL
-===================================================== */
 
 self.addEventListener("install", event => {
 
-    self.skipWaiting();
+  event.waitUntil(
 
-    event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache =>
+        cache.addAll(APP_FILES)
+      )
+      .then(() =>
+        self.skipWaiting()
+      )
 
-        caches
-            .open(CACHE_NAME)
-            .then(cache => cache.addAll(FILES))
-
-    );
+  );
 
 });
-
-
-/* =====================================================
-   ACTIVATE
-===================================================== */
 
 self.addEventListener("activate", event => {
 
-    event.waitUntil(
+  event.waitUntil(
 
-        caches
-            .keys()
-            .then(keys =>
+    caches.keys()
+      .then(keys =>
 
-                Promise.all(
+        Promise.all(
 
-                    keys
-                        .filter(key =>
-                            key !== CACHE_NAME
-                        )
-                        .map(key =>
-                            caches.delete(key)
-                        )
-
-                )
-
+          keys
+            .filter(
+              key => key !== CACHE_NAME
             )
-            .then(() =>
-                self.clients.claim()
+            .map(
+              key => caches.delete(key)
             )
 
-    );
+        )
+
+      )
+      .then(() =>
+        self.clients.claim()
+      )
+
+  );
 
 });
 
-
-/* =====================================================
-   FETCH
-===================================================== */
-
 self.addEventListener("fetch", event => {
 
-    event.respondWith(
+  event.respondWith(
 
-        fetch(event.request)
+    caches.match(event.request)
+      .then(cached => {
 
-            .then(networkResponse => {
+        if(cached){
+          return cached;
+        }
 
-                if (
-                    networkResponse &&
-                    networkResponse.status === 200
-                ) {
+        return fetch(event.request)
+          .then(response => {
 
-                    const responseToCache =
-                        networkResponse.clone();
+            if(
+              !response ||
+              response.status !== 200
+            ){
 
-                    caches
-                        .open(CACHE_NAME)
-                        .then(cache => {
+              return response;
 
-                            cache.put(
-                                event.request,
-                                responseToCache
-                            );
+            }
 
-                        });
+            const copy =
+              response.clone();
 
-                }
+            caches.open(CACHE_NAME)
+              .then(cache => {
 
-                return networkResponse;
-
-            })
-
-            .catch(() => {
-
-                return caches.match(
-                    event.request
+                cache.put(
+                  event.request,
+                  copy
                 );
 
-            })
+              });
 
-    );
+            return response;
+
+          })
+          .catch(() =>
+            caches.match("./index.html")
+          );
+
+      })
+
+  );
 
 });
