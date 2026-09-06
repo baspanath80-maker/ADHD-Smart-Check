@@ -1,86 +1,72 @@
-const CACHE_NAME = "adhd-smart-check-v2";
+const CACHE_NAME = "adhd-smart-check-v1";
 
-// รายการไฟล์ที่ต้องการให้ Cache ไว้ทันทีที่ติดตั้ง (รวม External CDNs)
-const APP_FILES = [
+// รายการไฟล์ที่ต้องการ Caching ไว้ใช้แบบ Offline
+const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./manifest.json",
+  "./icons/180.png",
   "./icons/192.png",
   "./icons/512.png",
-  "./icons/180.png",
+  // External CDNs (Font / Icons)
   "https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 ];
 
-// ติดตั้ง Service Worker
+// 1. INSTALL EVENT: ทำการ Cache ไฟล์ที่จำเป็นไว้ล่วงหน้า
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(APP_FILES);
-    })
+      console.log("[Service Worker] Caching app shell & assets");
+      return cache.addAll(ASSETS_TO_CACHE);
+    }).then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-// เปิดใช้งานและลบ Cache เก่า
+// 2. ACTIVATE EVENT: ลบ Cache เก่าที่ไม่ใช้งานแล้วออกเมื่อมีการอัปเดตเวอร์ชัน
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log("[Service Worker] Deleting old cache:", cache);
+            return caches.delete(cache);
+          }
+        })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// ดักจับการขอข้อมูล (Network / Cache Strategy)
+// 3. FETCH EVENT: ดึงข้อมูลจาก Cache ก่อน หากไม่มีเครือข่าย หรือโหลดใหม่หากมีอินเทอร์เน็ต (Network First with Cache Fallback)
 self.addEventListener("fetch", (event) => {
-  // ข้ามการทำ Cache สำหรับ API หรือ Google AI
-  if (
-    event.request.url.includes("generativelanguage.googleapis.com") ||
-    event.request.url.includes("/api/")
-  ) {
-    return;
-  }
+  // ข้ามการทำ Cache สำหรับ Request ที่ไม่ใช่ GET
+  if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // 1. ถ้ามีใน Cache ให้ดึงจาก Cache มาใช้ทันที
-      if (cachedResponse) {
-
-        return cachedResponse;
-      }
-
-      // 2. ถ้าไม่มี ให้ดึงจาก Network แล้วนำไปเก็บบันทึกใน Cache
-      return fetch(event.request)
-        .then((response) => {
-          // ปรับเงื่อนไขให้รองรับทั้ง Response แบบปกติ (basic) และแบบ Cross-Origin (opaque)
-          if (
-            response &&
-            response.status === 200 &&
-            (response.type === "basic" || response.type === "cors" || response.type === "opaque")
-          ) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone);
-            });
+    fetch(event.request)
+      .then((networkResponse) => {
+        // หากเชื่อมต่อเน็ตได้ ให้อัปเดต Cache ล่าสุดไว้เสมอ
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        // หากไม่มีอินเทอร์เน็ต ให้ดึงข้อมูลจาก Cache มาแสดงผลแทน
+        return caches.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            return cachedResponse;
           }
-          return response;
-        })
-        .catch(() => {
-          // หากไม่มีสัญญาณอินเทอร์เน็ต ให้แสดงหน้า index.html
-          return caches.match("./index.html");
+          // กรณีเข้าหน้าหลักตอนไม่มีเน็ต
+          if (event.request.mode === "navigate") {
+            return caches.match("./index.html");
+          }
         });
-    })
+      })
   );
-});
-
-// รับคำสั่ง Skip Waiting
-self.addEventListener("message", (event) => {
-  if (event.data === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
 });
