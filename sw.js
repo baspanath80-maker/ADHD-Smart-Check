@@ -1,53 +1,50 @@
-const CACHE_NAME = "adhd-smart-check-v1";
-
-// รายการไฟล์ที่ต้องการ Caching ไว้ใช้แบบ Offline
-const ASSETS_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icons/180.png",
-  "./icons/192.png",
-  "./icons/512.png",
-  // External CDNs (Font / Icons)
-  "https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap",
-  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+const CACHE_NAME = 'adhd-smart-check-v1';
+const urlsToCache = [
+  './',
+  './index.html',
+  './manifest.json',
+  './icons/192.png',
+  './icons/512.png'
 ];
 
-
-// ติดตั้งและบังคับใช้ทันที
-self.addEventListener("install", event => {
-  self.skipWaiting();
+// ติดตั้ง Service Worker และดึงไฟล์ลง Cache
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES))
-  );
-});
-
-// ลบ Cache เวอร์ชันเก่าออกทั้งหมด
-self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-      )
-    ).then(() => self.clients.claim())
-  );
-});
-
-// ดึงข้อมูลจาก Network ก่อน ถ้าไม่มีอินเทอร์เน็ตค่อยดึงจาก Cache
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    fetch(event.request)
-      .then(networkResponse => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
-        }
-        return networkResponse;
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
       })
-      .catch(() => caches.match(event.request))
+  );
+});
+
+// จัดการลบ Cache เก่าเมื่อมีการอัปเดตเวอร์ชัน
+self.addEventListener('activate', event => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
+// ดึงข้อมูลจาก Cache มาแสดงผลเมื่อออฟไลน์
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // หากเจอไฟล์ใน Cache ให้ส่งกลับไป
+        if (response) {
+          return response;
+        }
+        // หากไม่เจอ ให้ไปดึงจาก Network
+        return fetch(event.request);
+      })
   );
 });
