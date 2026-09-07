@@ -1,26 +1,26 @@
 {
+  "name": "ADHD Smart Check (SNAP-IV)",
   "short_name": "ADHD Smart",
-  "name": "ADHD Smart Check (SNAP-IV) - โรงพยาบาลดอนจาน",
-  "description": "ระบบประเมินคัดกรองภาวะสมาธิสั้น (SNAP-IV) โรงพยาบาลดอนจาน จังหวัดกาฬสินธุ์",
+  "description": "ADHD Smart Check ระบบคัดกรองภาวะสมาธิสั้นด้วย SNAP-IV โรงพยาบาลดอนจาน",
+  "lang": "th",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f7f9",
+  "theme_color": "#1e88e5",
   "icons": [
     {
       "src": "./icons/192.png",
-      "type": "image/png",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "./icons/512.png",
-      "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     }
-  ],
-  "start_url": "./index.html",
-  "background_color": "#f4f7f9",
-  "theme_color": "#1e88e5",
-  "display": "standalone",
-  "orientation": "portrait",
-  "scope": "./",
-  "lang": "th"
+  ]
 }
