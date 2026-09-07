@@ -1,8 +1,9 @@
 {
   "name": "ADHD Smart Check",
   "short_name": "ADHD Smart",
-  "description": "แบบประเมินและคัดกรองภาวะสมาธิสั้น (SNAP-IV) - โรงพยาบาลดอนจาน",
-  "start_url": "./index.html",
+  "description": "แบบประเมินและคัดกรองภาวะสมาธิสั้น (SNAP-IV)",
+  "lang": "th",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
@@ -10,16 +11,16 @@
   "theme_color": "#1e88e5",
   "icons": [
     {
-      "src": "icons/192.png",
+      "src": "./192.png",
       "sizes": "1920x1920",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icons/512.png",
+      "src": "./512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
