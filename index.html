@@ -109,8 +109,14 @@ button, input, select { font-family: 'Sarabun', sans-serif; }
   color: #64748b;
 }
 
-.btn-how-to {
-  background: #168fd0;
+.btn-group-pwa {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-install-direct {
+  background: #1e88e5;
   color: white;
   border: none;
   border-radius: 12px;
@@ -119,10 +125,27 @@ button, input, select { font-family: 'Sarabun', sans-serif; }
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 3px 8px rgba(30,136,229,.2);
+  box-shadow: 0 3px 8px rgba(30,136,229,.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.btn-how-to:hover { background: #1565c0; }
+.btn-install-direct:hover { background: #1565c0; }
+
+.btn-how-to {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-how-to:hover { background: #e2e8f0; }
 
 /* SHORTCUT MODAL */
 .shortcut-modal {
@@ -385,11 +408,12 @@ input:focus, select:focus {
   body { padding: 10px 8px; }
   .container { padding: 22px 14px; border-radius: 18px; }
   h1 { font-size: 27px; }
-  .pwa-header-row { align-items: flex-start; }
+  .pwa-header-row { flex-direction: column; align-items: flex-start; gap: 15px; }
   .pwa-title-group { align-items: flex-start; }
   .pwa-text-info h3 { font-size: 16px; }
   .pwa-text-info p { font-size: 13px; }
-  .btn-how-to { padding: 10px 14px; font-size: 14px; }
+  .btn-group-pwa { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+  .btn-install-direct, .btn-how-to { flex: 1; padding: 10px 12px; font-size: 14px; text-align: center; justify-content: center; }
   .info-grid { grid-template-columns: 1fr; padding: 15px; }
   .options-inline { grid-template-columns: repeat(2,1fr); }
   .form-buttons { flex-direction: column; }
@@ -426,13 +450,18 @@ input:focus, select:focus {
     <div class="pwa-title-group">
       <div class="pwa-text-info">
         <h3>เพิ่ม ADHD Smart Check ลงหน้าจอ</h3>
-        <p>เปิดใช้งานได้ง่ายจากไอคอน</p>
+        <p>เปิดใช้งานได้สะดวก รวดเร็ว และรองรับแบบ Offline</p>
       </div>
     </div>
 
-    <button type="button" class="btn-how-to" id="howInstallButton">
-      ติดตั้งแอป
-    </button>
+    <div class="btn-group-pwa">
+      <button type="button" class="btn-install-direct" id="directInstallBtn" style="display: none;">
+        <i class="fa-solid fa-download"></i> ติดตั้งแอป
+      </button>
+      <button type="button" class="btn-how-to" id="howInstallButton">
+        วิธีติดตั้ง
+      </button>
+    </div>
   </div>
 </div>
 
@@ -919,9 +948,10 @@ function resetForm(){
   window.scrollTo({ top:0, behavior:"smooth" });
 }
 
-/* PWA INSTALL & MODAL HANDLERS */
+/* PWA INSTALL & SERVICE WORKER HANDLERS */
 let deferredPrompt = null;
 const installBox = document.getElementById("installBox");
+const directInstallBtn = document.getElementById("directInstallBtn");
 const howInstallButton = document.getElementById("howInstallButton");
 const shortcutModal = document.getElementById("shortcutModal");
 const closeShortcutModal = document.getElementById("closeShortcutModal");
@@ -931,27 +961,42 @@ function isStandalone(){
   return (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true);
 }
 
+// 1. ลงทะเบียน Service Worker
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").then(registration => {
+      console.log("Service Worker Registered Successfully:", registration.scope);
+    }).catch(error => {
+      console.error("Service Worker Registration Failed:", error);
+    });
+  });
+}
+
+// 2. จับ Event beforeinstallprompt เพื่อเปิดปุ่ม "ติดตั้งแอป" ทันทีถ้าเบราว์เซอร์รองรับ
 window.addEventListener("beforeinstallprompt", event => {
   event.preventDefault();
   deferredPrompt = event;
-  if(!isStandalone()){
-    installBox.style.display = "block";
+  if (directInstallBtn) {
+    directInstallBtn.style.display = "inline-flex";
   }
 });
 
-howInstallButton.addEventListener("click", () => {
-  if (deferredPrompt) {
+// กดปุ่มติดตั้งโดยตรง
+if (directInstallBtn) {
+  directInstallBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(choiceResult => {
-      if (choiceResult.outcome === "accepted") {
-        installBox.style.display = "none";
-      }
-      deferredPrompt = null;
-    });
-  } else {
-    shortcutModal.style.display = "block";
-    document.body.style.overflow = "hidden";
-  }
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to install prompt: ${outcome}`);
+    deferredPrompt = null;
+    directInstallBtn.style.display = "none";
+  });
+}
+
+// กดปุ่มคู่มือวิธีติดตั้ง
+howInstallButton.addEventListener("click", () => {
+  shortcutModal.style.display = "block";
+  document.body.style.overflow = "hidden";
 });
 
 function closeShortcut(){
@@ -969,24 +1014,16 @@ document.addEventListener("keydown", event => {
   }
 });
 
+// เมื่อแอปติดตั้งเรียบร้อยแล้ว
 window.addEventListener("appinstalled", () => {
   deferredPrompt = null;
   shortcutModal.style.display = "none";
   installBox.style.display = "none";
 });
 
+// ซ่อนกล่องแจ้งเตือนติดตั้งหากเปิดใช้งานแบบ App (Standalone) อยู่แล้ว
 if(isStandalone()){
   installBox.style.display = "none";
-}
-
-if("serviceWorker" in navigator){
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").then(registration => {
-      console.log("ADHD Smart Check PWA Ready", registration.scope);
-    }).catch(error => {
-      console.error("Service Worker Error:", error);
-    });
-  });
 }
 </script>
 
