@@ -13,60 +13,41 @@ const ASSETS_TO_CACHE = [
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 ];
 
-// 1. INSTALL EVENT: ทำการ Cache ไฟล์ที่จำเป็นไว้ล่วงหน้า
-self.addEventListener("install", (event) => {
+
+// ติดตั้งและบังคับใช้ทันที
+self.addEventListener("install", event => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log("[Service Worker] Caching app shell & assets");
-      return cache.addAll(ASSETS_TO_CACHE);
-    }).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES))
   );
 });
 
-// 2. ACTIVATE EVENT: ลบ Cache เก่าที่ไม่ใช้งานแล้วออกเมื่อมีการอัปเดตเวอร์ชัน
-self.addEventListener("activate", (event) => {
+// ลบ Cache เวอร์ชันเก่าออกทั้งหมด
+self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log("[Service Worker] Deleting old cache:", cache);
-            return caches.delete(cache);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
-// 3. FETCH EVENT: ดึงข้อมูลจาก Cache ก่อน หากไม่มีเครือข่าย หรือโหลดใหม่หากมีอินเทอร์เน็ต (Network First with Cache Fallback)
-self.addEventListener("fetch", (event) => {
-  // ข้ามการทำ Cache สำหรับ Request ที่ไม่ใช่ GET
-  if (event.request.method !== "GET") return;
-
+// ดึงข้อมูลจาก Network ก่อน ถ้าไม่มีอินเทอร์เน็ตค่อยดึงจาก Cache
+self.addEventListener("fetch", event => {
   event.respondWith(
     fetch(event.request)
-      .then((networkResponse) => {
-        // หากเชื่อมต่อเน็ตได้ ให้อัปเดต Cache ล่าสุดไว้เสมอ
+      .then(networkResponse => {
         if (networkResponse && networkResponse.status === 200) {
           const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
+          caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, responseToCache);
           });
         }
         return networkResponse;
       })
-      .catch(() => {
-        // หากไม่มีอินเทอร์เน็ต ให้ดึงข้อมูลจาก Cache มาแสดงผลแทน
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          // กรณีเข้าหน้าหลักตอนไม่มีเน็ต
-          if (event.request.mode === "navigate") {
-            return caches.match("./index.html");
-          }
-        });
-      })
+      .catch(() => caches.match(event.request))
   );
 });
